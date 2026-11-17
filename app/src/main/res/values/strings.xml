@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sigap</string>
+    <string name="splash_tagline">Perlindungan tenang untuk setiap pesan.</string>
+    <string name="logo_description">Logo Sigap: perisai dengan tanda centang</string>
+
+    <string name="action_next">Lanjut</string>
+    <string name="action_skip">Lewati</string>
+    <string name="action_get_started">Mulai</string>
+    <string name="action_finish">Selesai</string>
+    <string name="action_grant">Izinkan</string>
+    <string name="action_open_settings">Buka pengaturan</string>
+
+    <string name="onboarding_1_title">Penipuan bersembunyi di pesan biasa</string>
+    <string name="onboarding_1_body">Undangan pernikahan, foto paket kurir, atau petugas palsu. Banyak yang berupa file APK, bukan tautan.</string>
+    <string name="onboarding_2_title">Sigap berjaga dengan tenang</string>
+    <string name="onboarding_2_body">Tanpa salin dan tempel. Sigap hanya memperingatkan Anda saat ada pesan yang berisiko.</string>
+    <string name="onboarding_3_title">Pesan Anda tetap milik Anda</string>
+    <string name="onboarding_3_body">Analisis dilakukan di perangkat. Teks disamarkan sebelum pengecekan cloud, dan Anda yang mengatur semuanya.</string>
+
+    <string name="permissions_title">Aktifkan perlindungan</string>
+    <string name="permissions_disclosure">Sigap membaca notifikasi pesan masuk dari aplikasi yang Anda pilih, hanya untuk mendeteksi penipuan. Isi pesan lengkap tidak disimpan dan riwayat chat tidak dibaca.</string>
+    <string name="permission_listener_title">Akses notifikasi</string>
+    <string name="permission_listener_reason">Wajib. Agar Sigap bisa memeriksa pesan masuk.</string>
+    <string name="permission_post_title">Kirim notifikasi</string>
+    <string name="permission_post_reason">Wajib. Agar Sigap bisa memperingatkan Anda.</string>
+    <string name="permission_contacts_title">Kontak</string>
+    <string name="permission_contacts_reason">Opsional. Agar pengirim yang sudah Anda simpan tidak diperiksa.</string>
+    <string name="permission_battery_title">Pengaturan baterai</string>
+    <string name="permission_battery_reason">Opsional. Beberapa ponsel menghentikan aplikasi latar belakang.</string>
+    <string name="status_done">Selesai</string>
+    <string name="status_required">Wajib</string>
+    <string name="status_optional">Opsional</string>
+
+    <string name="tab_home">Beranda</string>
+    <string name="tab_activity">Aktivitas</string>
+    <string name="tab_family">Keluarga</string>
+    <string name="tab_learn">Belajar</string>
+    <string name="tab_settings">Pengaturan</string>
+
+    <string name="home_greeting">Halo, tetap waspada</string>
+    <string name="protection_active">Perlindungan aktif</string>
+    <string name="protection_active_body">Sigap memantau notifikasi pesan masuk.</string>
+    <string name="protection_attention">Perlu perhatian</string>
+    <string name="protection_attention_body">Akses notifikasi belum aktif. Ketuk untuk memperbaiki.</string>
+    <string name="coming_soon_title">Segera hadir</string>
+    <string name="coming_soon_body">Layar ini dibangun pada tahap berikutnya.</string>
+
+    <string name="channel_danger">Peringatan bahaya</string>
+    <string name="channel_caution">Peringatan hati-hati</string>
+    <string name="channel_family">Peringatan keluarga</string>
+    <string name="alert_title_danger">Kemungkinan pesan penipuan</string>
+    <string name="alert_title_caution">Hati-hati dengan pesan ini</string>
+    <string name="alert_body_fallback">Pesan ini terlihat mencurigakan.</string>
+    <string name="alert_public_text">Sigap: ada pesan yang perlu perhatian</string>
+    <string name="action_details">Detail</string>
+    <string name="action_trust_sender">Percayai pengirim</string>
+    <string name="action_dismiss">Abaikan</string>
+
+    <string name="reason_apk_file">Pengirim tak dikenal mengirim file APK. Undangan asli berupa tautan, bukan APK.</string>
+    <string name="reason_file_lure">Pesan memakai umpan penipuan umum seperti undangan, paket, atau surat tilang.</string>
+    <string name="reason_shortened_link">Tautan dipendekkan sehingga tujuan aslinya tersembunyi.</string>
+    <string name="reason_ip_link">Tautan mengarah ke alamat IP, bukan situs resmi.</string>
+    <string name="reason_risky_tld">Tautan memakai domain yang sering disalahgunakan.</string>
+    <string name="reason_lookalike_domain">Tautan menyerupai nama bank, dompet digital, atau layanan resmi.</string>
+    <string name="reason_user_info_url">Tautan memuat tanda @ untuk menyamarkan tujuan sebenarnya.</string>
+    <string name="reason_punycode_url">Tautan memakai karakter menyerupai huruf lain.</string>
+    <string name="reason_link_from_unknown">Pengirim tak dikenal mengirim tautan.</string>
+    <string name="reason_urgency">Pesan menekan Anda untuk bertindak segera.</string>
+    <string name="reason_credential_request">Pesan menyebut OTP, PIN, atau kata sandi.</string>
+    <string name="reason_otp_share_request">Pesan meminta Anda membagikan kode OTP atau PIN.</string>
+    <string name="reason_impersonation">Pesan mengaku dari instansi, bank, atau petugas.</string>
+    <string name="reason_money_reward">Pesan membahas hadiah, transfer, atau uang.</string>
+    <string name="reason_social_engineering">Pesan memakai bujukan seperti kerja mudah atau minta transfer dulu.</string>
+
+    <string name="stat_scanned">Dipindai</string>
+    <string name="stat_warnings">Peringatan</string>
+    <string name="stat_dangerous">Bahaya</string>
+    <string name="home_latest_alerts">Peringatan terbaru</string>
+    <string name="home_no_alerts_title">Belum ada peringatan</string>
+    <string name="home_no_alerts_body">Sigap akan memberi tahu Anda saat ada pesan berisiko.</string>
+    <string name="risk_danger">Bahaya</string>
+    <string name="risk_caution">Hati-hati</string>
+    <string name="risk_safe">Aman</string>
+
+    <string name="action_back">Kembali</string>
+    <string name="action_retry">Coba lagi</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_confirm">Ya</string>
+    <string name="action_undo">Urungkan</string>
+    <string name="action_delete">Hapus</string>
+    <string name="home_check_something">Periksa sesuatu</string>
+
+    <string name="check_title">Periksa sesuatu</string>
+    <string name="check_pick_screenshot">Pilih tangkapan layar</string>
+    <string name="check_pick_screenshot_desc">Sigap membaca teks dan kode QR di gambar, langsung di perangkat.</string>
+    <string name="check_scan_qr">Pindai kode QR</string>
+    <string name="check_scan_qr_desc">Periksa tautan di dalam kode QR sebelum membukanya.</string>
+    <string name="check_paste_text">Tempel teks</string>
+    <string name="check_paste_hint">Tempel pesan yang mencurigakan</string>
+    <string name="check_analyze">Periksa</string>
+    <string name="check_analyzing_reading">Membaca gambar</string>
+    <string name="check_analyzing_checking">Memeriksa pesan</string>
+    <string name="check_no_text_title">Tidak ada teks ditemukan</string>
+    <string name="check_no_text_body">Coba gambar lain yang teksnya lebih jelas.</string>
+    <string name="check_error_title">Gagal memeriksa</string>
+    <string name="check_error_body">Terjadi masalah saat membaca. Silakan coba lagi.</string>
+
+    <string name="activity_title">Aktivitas</string>
+    <string name="activity_search_hint">Cari pesan</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_danger">Bahaya</string>
+    <string name="filter_caution">Hati-hati</string>
+    <string name="filter_safe">Aman</string>
+    <string name="group_today">Hari ini</string>
+    <string name="group_yesterday">Kemarin</string>
+    <string name="group_earlier">Sebelumnya</string>
+    <string name="activity_empty_title">Tidak ada hasil</string>
+    <string name="activity_empty_body">Hasil pemindaian akan muncul di sini.</string>
+    <string name="activity_deleted">Hasil dihapus</string>
+
+    <string name="detail_title">Hasil pemeriksaan</string>
+    <string name="detail_why">Mengapa ditandai</string>
+    <string name="detail_why_none">Tidak ada tanda penipuan yang jelas.</string>
+    <string name="detail_preview">Cuplikan pesan</string>
+    <string name="detail_checked_device">Diperiksa di perangkat</string>
+    <string name="detail_what_to_do">Yang perlu dilakukan</string>
+    <string name="detail_score">Skor %1$d dari 100</string>
+    <string name="detail_not_found">Hasil tidak ditemukan.</string>
+    <string name="trust_confirm_title">Percayai pengirim ini?</string>
+    <string name="trust_confirm_body">Pesan dari pengirim ini tidak akan diperiksa lagi.</string>
+    <string name="action_block_guide">Cara memblokir pengirim</string>
+    <string name="block_guide_title">Cara memblokir</string>
+    <string name="block_guide_whatsapp">WhatsApp: buka chat, ketuk nama pengirim, lalu pilih Blokir dan Laporkan.</string>
+    <string name="block_guide_sms">SMS: buka pesan, ketuk menu, lalu pilih Blokir nomor.</string>
+    <string name="block_guide_note">Sigap tidak bisa memblokir pengirim sendiri.</string>
+
+    <string name="advice_danger_1">Jangan buka tautan atau file ini.</string>
+    <string name="advice_danger_2">Jangan bagikan OTP, PIN, atau kata sandi.</string>
+    <string name="advice_danger_3">Blokir dan laporkan pengirim di aplikasi pesan.</string>
+    <string name="advice_caution_1">Jangan klik tautan sebelum yakin.</string>
+    <string name="advice_caution_2">Pastikan lewat kontak resmi yang Anda tahu.</string>
+    <string name="advice_safe_1">Tidak ada tanda penipuan yang jelas. Tetap waspada.</string>
+
+    <string name="source_whatsapp">WhatsApp</string>
+    <string name="source_telegram">Telegram</string>
+    <string name="source_sms">SMS</string>
+    <string name="source_manual">Pemeriksaan manual</string>
+
+    <string name="category_APK_MALWARE">File APK berbahaya</string>
+    <string name="category_FAKE_COURIER">Kurir palsu</string>
+    <string name="category_FAKE_INVITATION">Undangan palsu</string>
+    <string name="category_AUTHORITY_IMPERSONATION">Mengaku instansi</string>
+    <string name="category_BANK_PHISHING">Phishing bank</string>
+    <string name="category_FAKE_PRIZE">Hadiah palsu</string>
+    <string name="category_INVESTMENT">Investasi</string>
+    <string name="category_ONLINE_LOAN">Pinjaman online</string>
+    <string name="category_ROMANCE">Asmara</string>
+    <string name="category_JOB_SCAM">Lowongan kerja palsu</string>
+    <string name="category_MARKETPLACE_FRAUD">Penipuan jual beli</string>
+    <string name="category_OTP_THEFT">Pencurian OTP</string>
+    <string name="category_OTHER">Lainnya</string>
+
+    <string name="home_i_clicked">Saya telanjur mengeklik</string>
+    <string name="home_checkup_title">Pemeriksaan keamanan</string>
+    <string name="home_checkup_review">Tinjau</string>
+
+    <string name="emergency_title">Mode darurat</string>
+    <string name="emergency_subtitle">Pilih semua yang sudah Anda lakukan. Tetap tenang, ikuti langkah berurutan.</string>
+    <string name="emergency_show_steps">Tampilkan langkah</string>
+    <string name="emergency_call_bank">Hubungi bank Anda (nomor di kartu)</string>
+    <string name="situation_link">Saya membuka tautan</string>
+    <string name="situation_app">Saya memasang aplikasi atau membuka file</string>
+    <string name="situation_credential">Saya membagikan OTP, PIN, atau kata sandi</string>
+    <string name="situation_money">Saya mentransfer uang</string>
+    <string name="situation_data">Saya membagikan data pribadi</string>
+
+    <string name="step_airplane">Nyalakan mode pesawat untuk memutus koneksi aplikasi berbahaya.</string>
+    <string name="step_dont_enter">Jangan masukkan data apa pun di halaman tersebut.</string>
+    <string name="step_close_page">Tutup halaman atau tab browser.</string>
+    <string name="step_uninstall">Buka daftar aplikasi dan hapus aplikasi yang tidak Anda kenal.</string>
+    <string name="step_accessibility">Periksa layanan aksesibilitas dan matikan aplikasi yang mencurigakan.</string>
+    <string name="step_change_cred_now">Ubah PIN, kata sandi, atau kode akses Anda sekarang.</string>
+    <string name="step_contact_bank">Hubungi bank atau dompet digital Anda lewat nomor resmi di belakang kartu.</string>
+    <string name="step_check_tx">Periksa mutasi dan transaksi terakhir.</string>
+    <string name="step_change_clean">Ubah kata sandi dan PIN dari perangkat lain yang aman.</string>
+    <string name="step_clear_browser">Bersihkan data dan sesi browser Anda.</string>
+    <string name="step_gather_evidence">Simpan bukti: tangkapan layar chat, nomor pelaku, dan bukti transfer.</string>
+    <string name="step_watch_followup">Waspadai penipuan lanjutan yang menyebut nama atau data Anda.</string>
+    <string name="step_notify_providers">Pertimbangkan memberi tahu penyedia layanan terkait.</string>
+    <string name="step_report_iasc">Laporkan ke Indonesia Anti-Scam Centre (IASC, layanan 24 jam).</string>
+    <string name="step_action_app_list">Buka daftar aplikasi</string>
+    <string name="step_action_accessibility">Buka aksesibilitas</string>
+    <string name="step_action_draft">Buat draf laporan IASC</string>
+
+    <string name="draft_title">Draf laporan IASC</string>
+    <string name="draft_warning">Jangan pernah mengisi PIN, OTP, atau kata sandi di sini.</string>
+    <string name="draft_datetime">Tanggal dan waktu kejadian</string>
+    <string name="draft_channel">Saluran pesan</string>
+    <string name="draft_scammer">Nomor atau rekening pelaku</string>
+    <string name="draft_amount">Jumlah kerugian (Rp)</string>
+    <string name="draft_ref">Nomor referensi transaksi</string>
+    <string name="draft_desc">Deskripsi singkat kejadian</string>
+    <string name="draft_evidence">Bukti yang Anda miliki</string>
+    <string name="evidence_screenshots">Tangkapan layar</string>
+    <string name="evidence_receipt">Bukti transfer</string>
+    <string name="evidence_chat">Ekspor chat</string>
+    <string name="draft_preview">Teks laporan siap kirim</string>
+    <string name="action_copy">Salin</string>
+    <string name="action_share">Bagikan teks</string>
+    <string name="action_save_draft">Simpan draf</string>
+    <string name="action_open_iasc">Buka situs IASC (iasc.ojk.go.id)</string>
+    <string name="draft_copied">Disalin ke papan klip</string>
+    <string name="draft_saved">Draf disimpan di perangkat</string>
+
+    <string name="checkup_title">Pemeriksaan keamanan</string>
+    <string name="checkup_good">Baik</string>
+    <string name="checkup_needs_work">Perlu perbaikan</string>
+    <string name="checkup_auto_section">Diperiksa otomatis</string>
+    <string name="checkup_self_section">Konfirmasi sendiri</string>
+    <string name="check_listener_title">Akses notifikasi Sigap aktif</string>
+    <string name="check_listener_reason">Diperlukan agar pesan masuk dapat diperiksa.</string>
+    <string name="check_lock_title">Kunci layar aktif</string>
+    <string name="check_lock_reason">Melindungi ponsel jika hilang atau dipinjam.</string>
+    <string name="check_patch_title">Update keamanan terbaru</string>
+    <string name="check_patch_reason">Update yang lebih tua dari 12 bulan lebih rentan.</string>
+    <string name="check_a11y_title">Tinjau layanan aksesibilitas</string>
+    <string name="check_a11y_reason">Aplikasi APK berbahaya sering meminta izin ini untuk membaca layar.</string>
+    <string name="check_unknown_title">Blokir instal aplikasi tak dikenal: %1$s</string>
+    <string name="check_unknown_reason">Mencegah file APK dipasang langsung dari aplikasi ini.</string>
+    <string name="check_protect_title">Google Play Protect aktif</string>
+    <string name="check_protect_reason">Buka Play Store, ketuk ikon profil, lalu pilih Play Protect.</string>
+    <string name="action_mark_done">Tandai selesai</string>
+
+    <string name="settings_protection">Perlindungan</string>
+    <string name="settings_monitored_apps">Aplikasi yang dipantau</string>
+    <string name="settings_trusted_senders">Pengirim tepercaya</string>
+    <string name="settings_sensitivity">Sensitivitas</string>
+    <string name="sensitivity_low">Rendah</string>
+    <string name="sensitivity_balanced">Seimbang</string>
+    <string name="sensitivity_high">Tinggi</string>
+    <string name="settings_hide_dangerous">Sembunyikan notifikasi berbahaya</string>
+    <string name="settings_hide_dangerous_desc">Menutup notifikasi asli saat terdeteksi berbahaya agar tidak terketuk.</string>
+    <string name="settings_cloud">Analisis cloud</string>
+    <string name="settings_cloud_desc">Hanya mengirim teks yang sudah disamarkan untuk pesan yang meragukan.</string>
+    <string name="settings_notifications">Saluran notifikasi</string>
+    <string name="settings_privacy">Privasi dan data</string>
+    <string name="settings_retention">Simpan riwayat selama</string>
+    <string name="retention_days">%1$d hari</string>
+    <string name="settings_clear_data">Hapus semua data</string>
+    <string name="settings_clear_confirm_title">Hapus semua data lokal?</string>
+    <string name="settings_clear_confirm_body">Riwayat pemindaian, pengirim tepercaya, dan draf laporan akan dihapus.</string>
+    <string name="settings_appearance">Tampilan dan bahasa</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistem</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="settings_language">Bahasa</string>
+    <string name="lang_id">Indonesia</string>
+    <string name="lang_en">English</string>
+    <string name="settings_about">Tentang</string>
+    <string name="about_version">Sigap v1.0.0 \u00B7 Sumber data: OJK (IASC), GASA, BSSN</string>
+    <string name="trusted_empty">Belum ada pengirim tepercaya.</string>
+    <string name="privacy_stored">Disimpan di perangkat: cuplikan pesan tersamar (maks 160 karakter), tingkat risiko, waktu.</string>
+    <string name="privacy_never">Tidak pernah disimpan: isi pesan lengkap, daftar kontak.</string>
+    <string name="activity_retention_note">Riwayat disimpan selama %1$d hari. Atur di Pengaturan.</string>
+
+    <string name="check_lookup_tile">Periksa nomor, rekening, atau tautan</string>
+    <string name="check_lookup_tile_desc">Cek laporan komunitas untuk nomor telepon, rekening bank, atau domain.</string>
+
+    <string name="lookup_title">Pemeriksaan entitas</string>
+    <string name="lookup_type_phone">Nomor telepon</string>
+    <string name="lookup_type_account">Rekening bank</string>
+    <string name="lookup_type_link">Tautan</string>
+    <string name="lookup_input_hint">Masukkan nomor, rekening, atau tautan</string>
+    <string name="lookup_reported_by">Dilaporkan oleh %1$d orang</string>
+    <string name="lookup_no_reports">Belum ada laporan. Ini tidak berarti aman.</string>
+    <string name="lookup_invalid_input">Format masukan tidak valid.</string>
+    <string name="lookup_open_cekrekening">Buka CekRekening.id</string>
+    <string name="action_report_this">Laporkan ke komunitas</string>
+
+    <string name="report_sheet_title">Laporkan ke komunitas</string>
+    <string name="report_note_label">Catatan singkat (opsional, maks 200 karakter, jangan isi data pribadi)</string>
+    <string name="report_consent">Hanya nomor, rekening, atau domain yang dibagikan, bukan isi pesan Anda.</string>
+    <string name="report_submit">Kirim laporan</string>
+    <string name="report_thanks">Terima kasih. Kini ada %1$d laporan untuk entitas ini.</string>
+
+    <string name="family_title">Perlindungan keluarga</string>
+    <string name="family_empty_title">Lindungi keluarga dengan persetujuan</string>
+    <string name="family_empty_body">Orang yang dilindungi membuat kode undangan, lalu penjaga bergabung. Isi pesan dan kontak tidak dibagikan.</string>
+    <string name="family_my_guardians">Penjaga saya</string>
+    <string name="family_people_i_protect">Orang yang saya lindungi</string>
+    <string name="family_add_guardian">Tambah penjaga</string>
+    <string name="family_become_guardian">Jadi penjaga</string>
+    <string name="family_consent_shared">Dibagikan: tingkat risiko, kategori, alasan singkat, aplikasi sumber, waktu.</string>
+    <string name="family_consent_not_shared">Tidak dibagikan: isi pesan, nama pengirim, daftar kontak.</string>
+    <string name="family_share_snippet">Bagikan juga cuplikan tersamar (opsional)</string>
+    <string name="family_invite_code_label">Kode undangan 6 digit (berlaku 10 menit)</string>
+    <string name="family_regenerate">Buat kode baru</string>
+    <string name="family_enter_code">Masukkan kode 6 digit</string>
+    <string name="family_your_name">Nama tampilan Anda</string>
+    <string name="family_alert_level">Tingkat peringatan</string>
+    <string name="family_level_danger_only">Hanya Bahaya</string>
+    <string name="family_level_danger_caution">Bahaya dan Hati-hati</string>
+    <string name="family_join">Hubungkan</string>
+    <string name="family_alerts_week">%1$d peringatan minggu ini</string>
+    <string name="family_call_person">Hubungi %1$s</string>
+    <string name="family_mark_handled">Tandai sudah ditangani</string>
+    <string name="family_handled_badge">Sudah ditangani</string>
+    <string name="family_talk_tip">Saran bicara: tanyakan dengan tenang apakah mereka baru menerima file atau tautan, dan jangan menyalahkan.</string>
+    <string name="family_pause">Jeda berbagi</string>
+    <string name="family_resume">Lanjutkan berbagi</string>
+    <string name="family_unlink">Putuskan tautan</string>
+
+    <string name="learn_title">Tren penipuan</string>
+    <string name="learn_read_time">%1$d mnt baca</string>
+    <string name="learn_how_it_works">Cara kerjanya</string>
+    <string name="learn_red_flags">Tanda bahaya</string>
+    <string name="learn_what_to_do">Yang harus dilakukan</string>
+    <string name="home_trend_teaser">Tren penipuan terkini</string>
+    <string name="home_see_all">Lihat semua</string>
+</resources>
+
+
+
+

@@ -1,0 +1,29 @@
+build:
+  maxIssues: 0
+  weights:
+    complexity: 1
+    formatting: 1
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+  MatchingDeclarationName:
+    active: false
+
+style:
+  MagicNumber:
+    active: false
+  WildcardImport:
+    active: false
+  UnusedPrivateMember:
+    active: false
+  ForbiddenComment:
+    active: false
+
+formatting:
+  MaximumLineLength:
+    maxLineLength: 160
+  Filename:
+    active: false
+  PackageName:
+    active: false

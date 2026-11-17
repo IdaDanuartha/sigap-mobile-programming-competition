@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sigap</string>
+    <string name="splash_tagline">Quiet protection for every message.</string>
+    <string name="logo_description">Sigap logo: a shield with a check mark</string>
+
+    <string name="action_next">Next</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_get_started">Get started</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_grant">Allow</string>
+    <string name="action_open_settings">Open settings</string>
+
+    <string name="onboarding_1_title">Scams hide in ordinary messages</string>
+    <string name="onboarding_1_body">Wedding invitations, courier photos, fake officials. Many arrive as APK files, not links.</string>
+    <string name="onboarding_2_title">Sigap watches quietly</string>
+    <string name="onboarding_2_body">No copy and paste. Sigap only warns you when a message looks risky.</string>
+    <string name="onboarding_3_title">Your messages stay yours</string>
+    <string name="onboarding_3_body">Analysis runs on your device. Text is redacted before any cloud check, and you stay in control.</string>
+
+    <string name="permissions_title">Turn on protection</string>
+    <string name="permissions_disclosure">Sigap reads incoming message notifications from the apps you choose, only to detect scams. Full message text is not stored and chat history is never read.</string>
+    <string name="permission_listener_title">Notification access</string>
+    <string name="permission_listener_reason">Required. Lets Sigap check incoming messages.</string>
+    <string name="permission_post_title">Post notifications</string>
+    <string name="permission_post_reason">Required. Lets Sigap warn you.</string>
+    <string name="permission_contacts_title">Contacts</string>
+    <string name="permission_contacts_reason">Optional. Saved contacts are not scanned.</string>
+    <string name="permission_battery_title">Battery settings</string>
+    <string name="permission_battery_reason">Optional. Some phones stop background apps.</string>
+    <string name="status_done">Done</string>
+    <string name="status_required">Required</string>
+    <string name="status_optional">Optional</string>
+
+    <string name="tab_home">Home</string>
+    <string name="tab_activity">Activity</string>
+    <string name="tab_family">Family</string>
+    <string name="tab_learn">Learn</string>
+    <string name="tab_settings">Settings</string>
+
+    <string name="home_greeting">Hello, stay alert</string>
+    <string name="protection_active">Protection active</string>
+    <string name="protection_active_body">Sigap is watching incoming message notifications.</string>
+    <string name="protection_attention">Needs attention</string>
+    <string name="protection_attention_body">Notification access is off. Tap to fix.</string>
+    <string name="coming_soon_title">Coming soon</string>
+    <string name="coming_soon_body">This screen is built in a later milestone.</string>
+
+    <string name="channel_danger">Danger alerts</string>
+    <string name="channel_caution">Caution alerts</string>
+    <string name="channel_family">Family alerts</string>
+    <string name="alert_title_danger">Likely scam message</string>
+    <string name="alert_title_caution">Be careful with this message</string>
+    <string name="alert_body_fallback">This message looks suspicious.</string>
+    <string name="alert_public_text">Sigap: a message needs your attention</string>
+    <string name="action_details">Details</string>
+    <string name="action_trust_sender">Trust sender</string>
+    <string name="action_dismiss">Dismiss</string>
+
+    <string name="reason_apk_file">An unknown sender sent an APK file. Real invitations are links, not APK files.</string>
+    <string name="reason_file_lure">The message uses a common scam lure such as an invitation, parcel, or traffic ticket.</string>
+    <string name="reason_shortened_link">The link is shortened, hiding its real destination.</string>
+    <string name="reason_ip_link">The link points to an IP address, not an official site.</string>
+    <string name="reason_risky_tld">The link uses a domain type that is often abused.</string>
+    <string name="reason_lookalike_domain">The link imitates a bank, e-wallet, or official service.</string>
+    <string name="reason_user_info_url">The link contains an @ sign that disguises its real target.</string>
+    <string name="reason_punycode_url">The link uses characters that imitate other letters.</string>
+    <string name="reason_link_from_unknown">An unknown sender sent a link.</string>
+    <string name="reason_urgency">The message pressures you to act immediately.</string>
+    <string name="reason_credential_request">The message mentions an OTP, PIN, or password.</string>
+    <string name="reason_otp_share_request">The message asks you to share an OTP or PIN.</string>
+    <string name="reason_impersonation">The message claims to be from an agency, bank, or official.</string>
+    <string name="reason_money_reward">The message talks about prizes, transfers, or money.</string>
+    <string name="reason_social_engineering">The message uses lures such as easy work or asking you to transfer first.</string>
+
+    <string name="stat_scanned">Scanned</string>
+    <string name="stat_warnings">Warnings</string>
+    <string name="stat_dangerous">Dangerous</string>
+    <string name="home_latest_alerts">Latest alerts</string>
+    <string name="home_no_alerts_title">No alerts yet</string>
+    <string name="home_no_alerts_body">Sigap will tell you when a message looks risky.</string>
+    <string name="risk_danger">Danger</string>
+    <string name="risk_caution">Caution</string>
+    <string name="risk_safe">Safe</string>
+
+    <string name="action_back">Back</string>
+    <string name="action_retry">Try again</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_confirm">Yes</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_delete">Delete</string>
+    <string name="home_check_something">Check something</string>
+
+    <string name="check_title">Check something</string>
+    <string name="check_pick_screenshot">Pick a screenshot</string>
+    <string name="check_pick_screenshot_desc">Sigap reads text and QR codes in the image, on your device.</string>
+    <string name="check_scan_qr">Scan a QR code</string>
+    <string name="check_scan_qr_desc">Check the link inside a QR code before opening it.</string>
+    <string name="check_paste_text">Paste text</string>
+    <string name="check_paste_hint">Paste the suspicious message</string>
+    <string name="check_analyze">Check</string>
+    <string name="check_analyzing_reading">Reading the image</string>
+    <string name="check_analyzing_checking">Checking the message</string>
+    <string name="check_no_text_title">No text found</string>
+    <string name="check_no_text_body">Try another image with clearer text.</string>
+    <string name="check_error_title">Could not check</string>
+    <string name="check_error_body">Something went wrong while reading. Please try again.</string>
+
+    <string name="activity_title">Activity</string>
+    <string name="activity_search_hint">Search messages</string>
+    <string name="filter_all">All</string>
+    <string name="filter_danger">Danger</string>
+    <string name="filter_caution">Caution</string>
+    <string name="filter_safe">Safe</string>
+    <string name="group_today">Today</string>
+    <string name="group_yesterday">Yesterday</string>
+    <string name="group_earlier">Earlier</string>
+    <string name="activity_empty_title">No results</string>
+    <string name="activity_empty_body">Scan results will appear here.</string>
+    <string name="activity_deleted">Result deleted</string>
+
+    <string name="detail_title">Scan result</string>
+    <string name="detail_why">Why this was flagged</string>
+    <string name="detail_why_none">No clear scam signs were found.</string>
+    <string name="detail_preview">Message preview</string>
+    <string name="detail_checked_device">Checked on device</string>
+    <string name="detail_what_to_do">What to do now</string>
+    <string name="detail_score">Score %1$d of 100</string>
+    <string name="detail_not_found">Result not found.</string>
+    <string name="trust_confirm_title">Trust this sender?</string>
+    <string name="trust_confirm_body">Messages from this sender will no longer be checked.</string>
+    <string name="action_block_guide">How to block the sender</string>
+    <string name="block_guide_title">How to block</string>
+    <string name="block_guide_whatsapp">WhatsApp: open the chat, tap the sender name, then choose Block and Report.</string>
+    <string name="block_guide_sms">SMS: open the message, tap the menu, then choose Block number.</string>
+    <string name="block_guide_note">Sigap cannot block senders itself.</string>
+
+    <string name="advice_danger_1">Do not open this link or file.</string>
+    <string name="advice_danger_2">Never share an OTP, PIN, or password.</string>
+    <string name="advice_danger_3">Block and report the sender in the messaging app.</string>
+    <string name="advice_caution_1">Do not click links until you are sure.</string>
+    <string name="advice_caution_2">Confirm through an official contact you know.</string>
+    <string name="advice_safe_1">No clear scam signs. Stay alert.</string>
+
+    <string name="source_whatsapp">WhatsApp</string>
+    <string name="source_telegram">Telegram</string>
+    <string name="source_sms">SMS</string>
+    <string name="source_manual">Manual check</string>
+
+    <string name="category_APK_MALWARE">Malicious APK</string>
+    <string name="category_FAKE_COURIER">Fake courier</string>
+    <string name="category_FAKE_INVITATION">Fake invitation</string>
+    <string name="category_AUTHORITY_IMPERSONATION">Authority impersonation</string>
+    <string name="category_BANK_PHISHING">Bank phishing</string>
+    <string name="category_FAKE_PRIZE">Fake prize</string>
+    <string name="category_INVESTMENT">Investment</string>
+    <string name="category_ONLINE_LOAN">Online loan</string>
+    <string name="category_ROMANCE">Romance</string>
+    <string name="category_JOB_SCAM">Job scam</string>
+    <string name="category_MARKETPLACE_FRAUD">Marketplace fraud</string>
+    <string name="category_OTP_THEFT">OTP theft</string>
+    <string name="category_OTHER">Other</string>
+
+    <string name="home_i_clicked">I clicked something</string>
+    <string name="home_checkup_title">Security checkup</string>
+    <string name="home_checkup_review">Review</string>
+
+    <string name="emergency_title">Emergency mode</string>
+    <string name="emergency_subtitle">Select everything that happened. Stay calm and follow the steps in order.</string>
+    <string name="emergency_show_steps">Show me what to do</string>
+    <string name="emergency_call_bank">Call your bank (use the number on your card)</string>
+    <string name="situation_link">I opened a link</string>
+    <string name="situation_app">I installed an app or file</string>
+    <string name="situation_credential">I shared an OTP, PIN, or password</string>
+    <string name="situation_money">I transferred money</string>
+    <string name="situation_data">I shared personal data</string>
+
+    <string name="step_airplane">Turn on airplane mode to cut off any malicious app.</string>
+    <string name="step_dont_enter">Do not enter any information on that page.</string>
+    <string name="step_close_page">Close the browser page or tab.</string>
+    <string name="step_uninstall">Open the app list and uninstall any app you do not recognize.</string>
+    <string name="step_accessibility">Review accessibility services and turn off anything unfamiliar.</string>
+    <string name="step_change_cred_now">Change that PIN, password, or code right now.</string>
+    <string name="step_contact_bank">Call your bank or e-wallet using the number on the back of your card.</string>
+    <string name="step_check_tx">Check your recent transactions.</string>
+    <string name="step_change_clean">Change your passwords and PINs from another, clean device.</string>
+    <string name="step_clear_browser">Clear your browser data and active sessions.</string>
+    <string name="step_gather_evidence">Keep evidence: chat screenshots, the sender number, and transfer receipts.</string>
+    <string name="step_watch_followup">Watch out for follow-up messages that use your name or details.</string>
+    <string name="step_notify_providers">Consider notifying the affected service providers.</string>
+    <string name="step_report_iasc">Report to the Indonesia Anti-Scam Centre (IASC, open 24 hours).</string>
+    <string name="step_action_app_list">Open app list</string>
+    <string name="step_action_accessibility">Open accessibility</string>
+    <string name="step_action_draft">Create IASC report draft</string>
+
+    <string name="draft_title">IASC report draft</string>
+    <string name="draft_warning">Never enter a PIN, OTP, or password here.</string>
+    <string name="draft_datetime">Date and time</string>
+    <string name="draft_channel">Channel</string>
+    <string name="draft_scammer">Scammer number or bank account</string>
+    <string name="draft_amount">Amount lost (Rp)</string>
+    <string name="draft_ref">Transaction reference</string>
+    <string name="draft_desc">Short description</string>
+    <string name="draft_evidence">Evidence you have</string>
+    <string name="evidence_screenshots">Screenshots</string>
+    <string name="evidence_receipt">Transfer receipt</string>
+    <string name="evidence_chat">Chat export</string>
+    <string name="draft_preview">Ready-to-send report text</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_share">Share as text</string>
+    <string name="action_save_draft">Save draft</string>
+    <string name="action_open_iasc">Open IASC site (iasc.ojk.go.id)</string>
+    <string name="draft_copied">Copied to clipboard</string>
+    <string name="draft_saved">Draft saved on device</string>
+
+    <string name="checkup_title">Security checkup</string>
+    <string name="checkup_good">Good</string>
+    <string name="checkup_needs_work">Needs work</string>
+    <string name="checkup_auto_section">Auto-checked</string>
+    <string name="checkup_self_section">Self-confirmed</string>
+    <string name="check_listener_title">Sigap notification access is on</string>
+    <string name="check_listener_reason">Needed so Sigap can check incoming messages.</string>
+    <string name="check_lock_title">Screen lock is set</string>
+    <string name="check_lock_reason">Protects your phone if it is lost or borrowed.</string>
+    <string name="check_patch_title">Security update is recent</string>
+    <string name="check_patch_reason">Updates older than 12 months leave known flaws unpatched.</string>
+    <string name="check_a11y_title">Review accessibility services</string>
+    <string name="check_a11y_reason">Malicious APK files often ask for this permission to read your screen.</string>
+    <string name="check_unknown_title">Block install unknown apps: %1$s</string>
+    <string name="check_unknown_reason">Stops APK files from being installed straight from this app.</string>
+    <string name="check_protect_title">Google Play Protect is on</string>
+    <string name="check_protect_reason">Open Play Store, tap your profile icon, then choose Play Protect.</string>
+    <string name="action_mark_done">Mark done</string>
+
+    <string name="settings_protection">Protection</string>
+    <string name="settings_monitored_apps">Monitored apps</string>
+    <string name="settings_trusted_senders">Trusted senders</string>
+    <string name="settings_sensitivity">Sensitivity</string>
+    <string name="sensitivity_low">Low</string>
+    <string name="sensitivity_balanced">Balanced</string>
+    <string name="sensitivity_high">High</string>
+    <string name="settings_hide_dangerous">Hide dangerous notifications</string>
+    <string name="settings_hide_dangerous_desc">Dismiss the original notification when it is flagged as dangerous.</string>
+    <string name="settings_cloud">Cloud analysis</string>
+    <string name="settings_cloud_desc">Sends redacted text only, and only for ambiguous messages.</string>
+    <string name="settings_notifications">Notification channels</string>
+    <string name="settings_privacy">Privacy and data</string>
+    <string name="settings_retention">Keep history for</string>
+    <string name="retention_days">%1$d days</string>
+    <string name="settings_clear_data">Clear all data</string>
+    <string name="settings_clear_confirm_title">Clear all local data?</string>
+    <string name="settings_clear_confirm_body">Scan history, trusted senders, and saved report drafts will be deleted.</string>
+    <string name="settings_appearance">Appearance and language</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_language">Language</string>
+    <string name="lang_id">Indonesian</string>
+    <string name="lang_en">English</string>
+    <string name="settings_about">About</string>
+    <string name="about_version">Sigap v1.0.0 \u00B7 Sources: OJK (IASC), GASA, BSSN</string>
+    <string name="trusted_empty">No trusted senders yet.</string>
+    <string name="privacy_stored">Stored on device: redacted snippet (up to 160 chars), risk level, time.</string>
+    <string name="privacy_never">Never stored: full message text, contacts.</string>
+    <string name="activity_retention_note">History is kept for %1$d days. Change this in Settings.</string>
+
+    <string name="check_lookup_tile">Look up a number, account, or link</string>
+    <string name="check_lookup_tile_desc">Check community reports for a phone number, bank account, or domain.</string>
+
+    <string name="lookup_title">Entity lookup</string>
+    <string name="lookup_type_phone">Phone number</string>
+    <string name="lookup_type_account">Bank account</string>
+    <string name="lookup_type_link">Link</string>
+    <string name="lookup_input_hint">Enter number, account, or link</string>
+    <string name="lookup_reported_by">Reported by %1$d people</string>
+    <string name="lookup_no_reports">No reports found. This does not mean it is safe.</string>
+    <string name="lookup_invalid_input">Invalid input format.</string>
+    <string name="lookup_open_cekrekening">Open CekRekening.id</string>
+    <string name="action_report_this">Report to community</string>
+
+    <string name="report_sheet_title">Report to community</string>
+    <string name="report_note_label">Short note (optional, max 200 chars, no personal data)</string>
+    <string name="report_consent">Only the number, account, or domain is shared, never your message.</string>
+    <string name="report_submit">Submit report</string>
+    <string name="report_thanks">Thank you. There are now %1$d reports for this entity.</string>
+
+    <string name="family_title">Family protection</string>
+    <string name="family_empty_title">Protect family members with consent</string>
+    <string name="family_empty_body">The protected person generates an invite code, and a guardian joins. Message text and contacts are not shared.</string>
+    <string name="family_my_guardians">My guardians</string>
+    <string name="family_people_i_protect">People I protect</string>
+    <string name="family_add_guardian">Add a guardian</string>
+    <string name="family_become_guardian">Become a guardian</string>
+    <string name="family_consent_shared">Shared: risk level, category, short reasons, source app, time.</string>
+    <string name="family_consent_not_shared">Not shared: message text, sender name, contacts.</string>
+    <string name="family_share_snippet">Also share a masked snippet (optional)</string>
+    <string name="family_invite_code_label">6-digit invite code (valid for 10 minutes)</string>
+    <string name="family_regenerate">Regenerate code</string>
+    <string name="family_enter_code">Enter 6-digit code</string>
+    <string name="family_your_name">Your display name</string>
+    <string name="family_alert_level">Alert level</string>
+    <string name="family_level_danger_only">Danger only</string>
+    <string name="family_level_danger_caution">Danger and Caution</string>
+    <string name="family_join">Connect</string>
+    <string name="family_alerts_week">%1$d alerts this week</string>
+    <string name="family_call_person">Call %1$s</string>
+    <string name="family_mark_handled">Mark as handled</string>
+    <string name="family_handled_badge">Handled</string>
+    <string name="family_talk_tip">Tip on what to say: ask calmly whether they received a file or link recently, without blaming.</string>
+    <string name="family_pause">Pause sharing</string>
+    <string name="family_resume">Resume sharing</string>
+    <string name="family_unlink">Unlink</string>
+
+    <string name="learn_title">Scam trends</string>
+    <string name="learn_read_time">%1$d min read</string>
+    <string name="learn_how_it_works">How it works</string>
+    <string name="learn_red_flags">Red flags</string>
+    <string name="learn_what_to_do">What to do</string>
+    <string name="home_trend_teaser">Latest scam trend</string>
+    <string name="home_see_all">See all</string>
+</resources>
+
+
+
+

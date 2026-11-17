@@ -1,0 +1,2 @@
+# Sigap ProGuard rules
+

@@ -39,6 +39,7 @@ interface ScanResultDao {
            OR redactedSnippet LIKE 'Kepada Yth. Bapak/Ibu sekalian, kami mengundang kehadiran Anda di acara pernikahan kami%'
            OR redactedSnippet LIKE 'Paket J&T Express tertahan di sortir Cakung%'
            OR redactedSnippet LIKE 'Polda Metro Jaya: Kendaraan B 4820 KLP%'
+           OR redactedSnippet LIKE 'Tawaran kerja paruh waktu like & subscribe komisi Rp 500rb/hari%'
         """
     )
     suspend fun deleteSeededDummyScans(): Int

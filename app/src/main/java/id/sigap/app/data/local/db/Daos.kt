@@ -31,6 +31,17 @@ interface ScanResultDao {
 
     @Query("DELETE FROM scan_results WHERE timestamp < :cutoff")
     suspend fun deleteOlderThan(cutoff: Long): Int
+
+    @Query(
+        """
+        DELETE FROM scan_results
+        WHERE redactedSnippet LIKE 'Tautan pendek mencurigakan mengaku dari kurir paket J&T%'
+           OR redactedSnippet LIKE 'Kepada Yth. Bapak/Ibu sekalian, kami mengundang kehadiran Anda di acara pernikahan kami%'
+           OR redactedSnippet LIKE 'Paket J&T Express tertahan di sortir Cakung%'
+           OR redactedSnippet LIKE 'Polda Metro Jaya: Kendaraan B 4820 KLP%'
+        """
+    )
+    suspend fun deleteSeededDummyScans(): Int
 }
 
 @Dao

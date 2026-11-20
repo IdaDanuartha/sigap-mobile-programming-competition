@@ -285,8 +285,8 @@ fun CheckupScreen(onBack: () -> Unit) {
                         val isWaChecked = waItem?.passed ?: true
                         SelfCheckAppRow(
                             icon = Lucide.MessageSquare,
-                            iconBg = Color(0xFFD5EBE2),
-                            iconTint = Color(0xFF14594A),
+                            iconBg = MaterialTheme.colorScheme.primaryContainer,
+                            iconTint = MaterialTheme.colorScheme.primary,
                             name = "WhatsApp",
                             statusText = if (isWaChecked) "Sumber ini: Nonaktif" else "Sumber ini: Memiliki izin",
                             isConfirmed = isWaChecked,
@@ -300,8 +300,8 @@ fun CheckupScreen(onBack: () -> Unit) {
                         val isChromeChecked = chromeItem?.passed ?: true
                         SelfCheckAppRow(
                             icon = Lucide.Globe,
-                            iconBg = Color(0xFFFFF3D6),
-                            iconTint = Color(0xFF996500),
+                            iconBg = MaterialTheme.colorScheme.primaryContainer,
+                            iconTint = MaterialTheme.colorScheme.primary,
                             name = "Google Chrome",
                             statusText = if (isChromeChecked) "Sumber ini: Nonaktif" else "Sumber ini: Memiliki izin",
                             isConfirmed = isChromeChecked,
@@ -315,8 +315,8 @@ fun CheckupScreen(onBack: () -> Unit) {
                         val isTeleChecked = teleItem?.passed ?: true
                         SelfCheckAppRow(
                             icon = Lucide.Send,
-                            iconBg = Color(0xFFE2F0EA),
-                            iconTint = Color(0xFF14594A),
+                            iconBg = MaterialTheme.colorScheme.primaryContainer,
+                            iconTint = MaterialTheme.colorScheme.primary,
                             name = "Telegram",
                             statusText = if (isTeleChecked) "Sumber ini: Nonaktif" else "Sumber ini: Memiliki izin",
                             isConfirmed = isTeleChecked,
@@ -329,37 +329,37 @@ fun CheckupScreen(onBack: () -> Unit) {
                         val protectItem = state.selfChecks.find { it.id == CheckIds.PLAY_PROTECT }
                         val isProtectOn = protectItem?.passed ?: true
                         Surface(
-                            shape = RoundedCornerShape(14.dp),
+                            shape = RoundedCornerShape(12.dp),
                             color = MaterialTheme.colorScheme.surfaceContainer,
                             modifier = Modifier.fillMaxWidth(),
                         ) {
                             Row(
-                                Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                                Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
                                 ) {
                                     Box(
                                         Modifier
-                                            .size(38.dp)
-                                            .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(10.dp)),
+                                            .size(34.dp)
+                                            .background(MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(8.dp)),
                                         contentAlignment = Alignment.Center,
                                     ) {
                                         Icon(
                                             Lucide.ShieldCheck,
                                             contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.onPrimary,
-                                            modifier = Modifier.size(20.dp),
+                                            tint = MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.size(16.dp),
                                         )
                                     }
                                     Column {
                                         Text(
                                             text = "Google Play Protect",
                                             style = MaterialTheme.typography.titleSmall.copy(
-                                                fontSize = 14.sp,
+                                                fontSize = 13.sp,
                                                 fontWeight = FontWeight.Bold,
                                             ),
                                             color = MaterialTheme.colorScheme.onSurface,
@@ -380,6 +380,9 @@ fun CheckupScreen(onBack: () -> Unit) {
                                     colors = SwitchDefaults.colors(
                                         checkedThumbColor = Color.White,
                                         checkedTrackColor = MaterialTheme.colorScheme.primary,
+                                        uncheckedThumbColor = SigapTheme.colors.textMuted,
+                                        uncheckedTrackColor = MaterialTheme.colorScheme.surface,
+                                        uncheckedBorderColor = MaterialTheme.colorScheme.outline,
                                     ),
                                 )
                             }
@@ -766,8 +769,11 @@ private fun SelfCheckAppRow(
             Surface(
                 onClick = onToggle,
                 shape = RoundedCornerShape(8.dp),
-                color = if (isConfirmed) Color(0xFFD5EBE2) else MaterialTheme.colorScheme.surface,
-                border = if (!isConfirmed) BorderStroke(1.dp, MaterialTheme.colorScheme.outline) else null,
+                color = if (isConfirmed) SigapTheme.colors.safeContainer else SigapTheme.colors.cautionContainer,
+                border = BorderStroke(
+                    1.dp,
+                    if (isConfirmed) SigapTheme.colors.safe.copy(alpha = 0.3f) else SigapTheme.colors.caution.copy(alpha = 0.4f),
+                ),
             ) {
                 Row(
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
@@ -778,7 +784,7 @@ private fun SelfCheckAppRow(
                         Icon(
                             Lucide.Check,
                             contentDescription = null,
-                            tint = Color(0xFF14594A),
+                            tint = SigapTheme.colors.safe,
                             modifier = Modifier.size(12.dp),
                         )
                     }
@@ -788,7 +794,7 @@ private fun SelfCheckAppRow(
                             fontSize = 11.sp,
                             fontWeight = FontWeight.SemiBold,
                         ),
-                        color = if (isConfirmed) Color(0xFF14594A) else MaterialTheme.colorScheme.onSurface,
+                        color = if (isConfirmed) SigapTheme.colors.safe else SigapTheme.colors.onCaution,
                     )
                 }
             }

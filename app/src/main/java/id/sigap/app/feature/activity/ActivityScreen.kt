@@ -331,7 +331,15 @@ private fun ActivityFilterRow(
             FilterChip(
                 selected = selected == ActivityFilter.ALL,
                 onClick = { onSelect(ActivityFilter.ALL) },
+                shape = RoundedCornerShape(12.dp),
                 label = { Text("Semua  $totalCount", fontWeight = FontWeight.SemiBold) },
+                border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = selected == ActivityFilter.ALL,
+                    borderColor = MaterialTheme.colorScheme.outline,
+                    selectedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                    selectedBorderWidth = 1.dp,
+                ),
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                     selectedLabelColor = MaterialTheme.colorScheme.primary,
@@ -344,15 +352,23 @@ private fun ActivityFilterRow(
             FilterChip(
                 selected = selected == ActivityFilter.DANGER,
                 onClick = { onSelect(ActivityFilter.DANGER) },
+                shape = RoundedCornerShape(12.dp),
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
                         Box(Modifier.size(6.dp).background(SigapTheme.colors.danger, CircleShape))
-                        Text("Berbahaya")
+                        Text("Berbahaya", fontWeight = FontWeight.Medium)
                     }
                 },
+                border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = selected == ActivityFilter.DANGER,
+                    borderColor = MaterialTheme.colorScheme.outline,
+                    selectedBorderColor = SigapTheme.colors.danger.copy(alpha = 0.5f),
+                    selectedBorderWidth = 1.dp,
+                ),
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = SigapTheme.colors.dangerContainer,
                     selectedLabelColor = SigapTheme.colors.danger,
@@ -365,15 +381,23 @@ private fun ActivityFilterRow(
             FilterChip(
                 selected = selected == ActivityFilter.CAUTION,
                 onClick = { onSelect(ActivityFilter.CAUTION) },
+                shape = RoundedCornerShape(12.dp),
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
                         Box(Modifier.size(6.dp).background(SigapTheme.colors.caution, CircleShape))
-                        Text("Waspada")
+                        Text("Waspada", fontWeight = FontWeight.Medium)
                     }
                 },
+                border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = selected == ActivityFilter.CAUTION,
+                    borderColor = MaterialTheme.colorScheme.outline,
+                    selectedBorderColor = SigapTheme.colors.caution.copy(alpha = 0.55f),
+                    selectedBorderWidth = 1.dp,
+                ),
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = SigapTheme.colors.cautionContainer,
                     selectedLabelColor = SigapTheme.colors.onCaution,
@@ -386,15 +410,23 @@ private fun ActivityFilterRow(
             FilterChip(
                 selected = selected == ActivityFilter.SAFE,
                 onClick = { onSelect(ActivityFilter.SAFE) },
+                shape = RoundedCornerShape(12.dp),
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
                         Box(Modifier.size(6.dp).background(SigapTheme.colors.safe, CircleShape))
-                        Text("Aman")
+                        Text("Aman", fontWeight = FontWeight.Medium)
                     }
                 },
+                border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = selected == ActivityFilter.SAFE,
+                    borderColor = MaterialTheme.colorScheme.outline,
+                    selectedBorderColor = SigapTheme.colors.safe.copy(alpha = 0.5f),
+                    selectedBorderWidth = 1.dp,
+                ),
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = SigapTheme.colors.safeContainer,
                     selectedLabelColor = SigapTheme.colors.safe,

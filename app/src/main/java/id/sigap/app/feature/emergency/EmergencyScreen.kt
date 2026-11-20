@@ -351,7 +351,7 @@ fun EmergencyScreen(categoryName: String?, onBack: () -> Unit, onOpenDraft: () -
             verticalArrangement = Arrangement.spacedBy(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            // "Hubungi bank sekarang" button with soft reddish background
+            // "Hubungi bank sekarang" primary danger CTA
             Button(
                 onClick = {
                     val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:1500000"))
@@ -359,11 +359,11 @@ fun EmergencyScreen(categoryName: String?, onBack: () -> Unit, onOpenDraft: () -
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp),
+                    .height(52.dp),
                 shape = RoundedCornerShape(14.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFFFE8E7),
-                    contentColor = Color(0xFFBA1A1A),
+                    containerColor = SigapTheme.colors.danger,
+                    contentColor = Color.White,
                 ),
             ) {
                 Row(
@@ -373,7 +373,7 @@ fun EmergencyScreen(categoryName: String?, onBack: () -> Unit, onOpenDraft: () -
                     Icon(
                         Lucide.Phone,
                         contentDescription = null,
-                        tint = Color(0xFFBA1A1A),
+                        tint = Color.White,
                         modifier = Modifier.size(18.dp),
                     )
                     Text(
@@ -382,43 +382,51 @@ fun EmergencyScreen(categoryName: String?, onBack: () -> Unit, onOpenDraft: () -
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold,
                         ),
-                        color = Color(0xFFBA1A1A),
+                        color = Color.White,
                     )
                 }
             }
 
-            // "Tandai semua langkah darurat selesai" link
-            Row(
+            // "Tandai semua langkah darurat selesai" secondary action (48dp touch target)
+            Surface(
+                onClick = {
+                    completedSteps = setOf(
+                        EmergencyStep.AIRPLANE_MODE,
+                        EmergencyStep.UNINSTALL_APP,
+                        EmergencyStep.REVIEW_ACCESSIBILITY,
+                        EmergencyStep.CHANGE_PASSWORDS_CLEAN_DEVICE,
+                        EmergencyStep.CONTACT_BANK,
+                        EmergencyStep.REPORT_IASC,
+                    )
+                },
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surface,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
                 modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .clickable {
-                        completedSteps = setOf(
-                            EmergencyStep.AIRPLANE_MODE,
-                            EmergencyStep.UNINSTALL_APP,
-                            EmergencyStep.REVIEW_ACCESSIBILITY,
-                            EmergencyStep.CHANGE_PASSWORDS_CLEAN_DEVICE,
-                            EmergencyStep.CONTACT_BANK,
-                            EmergencyStep.REPORT_IASC,
-                        )
-                    }
-                    .padding(vertical = 6.dp, horizontal = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    .fillMaxWidth()
+                    .height(48.dp),
             ) {
-                Icon(
-                    Lucide.Check,
-                    contentDescription = null,
-                    tint = SigapTheme.colors.textMuted,
-                    modifier = Modifier.size(16.dp),
-                )
-                Text(
-                    text = "Tandai semua langkah darurat selesai",
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold,
-                    ),
-                    color = SigapTheme.colors.textMuted,
-                )
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Icon(
+                        Lucide.Check,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(16.dp),
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = "Tandai semua langkah darurat selesai",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.SemiBold,
+                        ),
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                }
             }
         }
     }

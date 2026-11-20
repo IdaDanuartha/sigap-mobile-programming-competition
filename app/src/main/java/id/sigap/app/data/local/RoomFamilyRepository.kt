@@ -19,17 +19,22 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-class RoomFamilyRepository(private val dao: FamilyDao) : FamilyRepository {
+class RoomFamilyRepository(
+    private val dao: FamilyDao,
+    private val demoModeProvider: () -> Boolean = { false },
+) : FamilyRepository {
 
     private var cleanedDummy = false
 
     private suspend fun ensureRealDataOnly() {
         if (cleanedDummy) return
         cleanedDummy = true
-        val dummyIds = dao.findSeededDummyLinkIds()
-        dummyIds.forEach { id ->
-            dao.deleteAlertsForLink(id)
-            dao.deleteLink(id)
+        if (!demoModeProvider()) {
+            val dummyIds = dao.findSeededDummyLinkIds()
+            dummyIds.forEach { id ->
+                dao.deleteAlertsForLink(id)
+                dao.deleteLink(id)
+            }
         }
     }
 

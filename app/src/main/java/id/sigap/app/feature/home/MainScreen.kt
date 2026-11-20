@@ -43,6 +43,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -157,7 +158,7 @@ fun MainScreen(
     if (showNotificationCenter) {
         NotificationCenterSheet(
             onDismiss = { showNotificationCenter = false },
-            onOpenAlertDetail = { onOpenAlert(1L) },
+            onOpenAlertDetail = { id -> onOpenAlert(id) },
             onOpenQuiz = onOpenQuiz,
             onOpenSimulation = onOpenSimulation,
         )
@@ -842,7 +843,8 @@ private fun SmallBentoStatsRow(
     ) {
         Surface(
             shape = RoundedCornerShape(14.dp),
-            color = MaterialTheme.colorScheme.surfaceContainer,
+            color = MaterialTheme.colorScheme.surface,
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.65f)),
             modifier = Modifier
                 .weight(1f)
                 .defaultMinSize(minHeight = 82.dp),
@@ -868,7 +870,8 @@ private fun SmallBentoStatsRow(
 
         Surface(
             shape = RoundedCornerShape(14.dp),
-            color = MaterialTheme.colorScheme.surfaceContainer,
+            color = MaterialTheme.colorScheme.surface,
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.65f)),
             modifier = Modifier
                 .weight(1f)
                 .defaultMinSize(minHeight = 82.dp),
@@ -994,7 +997,8 @@ private fun QuickActionsBentoSection(
         ) {
             Surface(
                 shape = RoundedCornerShape(14.dp),
-                color = MaterialTheme.colorScheme.surfaceContainer,
+                color = MaterialTheme.colorScheme.surface,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.65f)),
                 modifier = Modifier
                     .weight(1f)
                     .defaultMinSize(minHeight = 68.dp)
@@ -1032,7 +1036,8 @@ private fun QuickActionsBentoSection(
 
             Surface(
                 shape = RoundedCornerShape(14.dp),
-                color = MaterialTheme.colorScheme.surfaceContainer,
+                color = MaterialTheme.colorScheme.surface,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.65f)),
                 modifier = Modifier
                     .weight(1f)
                     .defaultMinSize(minHeight = 68.dp)
@@ -1146,9 +1151,23 @@ private fun LatestAlertsSection(
                 }
             }
         } else {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                alerts.take(4).forEach { alert ->
-                    EditorialAlertRow(alert = alert, onClick = { onOpenAlert(alert.id) })
+            val visibleAlerts = alerts.take(4)
+            Surface(
+                shape = RoundedCornerShape(18.dp),
+                color = MaterialTheme.colorScheme.surface,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Column {
+                    visibleAlerts.forEachIndexed { index, alert ->
+                        EditorialAlertRow(alert = alert, onClick = { onOpenAlert(alert.id) })
+                        if (index < visibleAlerts.lastIndex) {
+                            HorizontalDivider(
+                                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.55f),
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -1159,8 +1178,6 @@ private fun LatestAlertsSection(
 private fun EditorialAlertRow(alert: ScanResult, onClick: () -> Unit) {
     val isEn = LocalConfiguration.current.locales[0]?.language == "en"
     val isDanger = alert.level == RiskLevel.DANGER
-    val edgeColor = if (isDanger) SigapTheme.colors.danger else SigapTheme.colors.caution
-    val rowBg = if (isDanger) SigapTheme.colors.dangerRowTint else SigapTheme.colors.cautionRowTint
     val riskLabel = when {
         isDanger && isEn -> "Danger"
         isDanger -> "Berbahaya"
@@ -1168,6 +1185,8 @@ private fun EditorialAlertRow(alert: ScanResult, onClick: () -> Unit) {
         else -> "Mencurigakan"
     }
     val riskTextColor = if (isDanger) SigapTheme.colors.danger else SigapTheme.colors.onCaution
+    val iconBg = if (isDanger) SigapTheme.colors.dangerContainer else SigapTheme.colors.cautionContainer
+    val dotColor = if (isDanger) SigapTheme.colors.danger else SigapTheme.colors.caution
 
     val sourceName = stringResource(sourceLabelRes(alert.sourcePackage))
     val sourceIcon = when {
@@ -1188,114 +1207,98 @@ private fun EditorialAlertRow(alert: ScanResult, onClick: () -> Unit) {
         DateUtils.FORMAT_ABBREV_RELATIVE,
     ).toString()
 
-    Surface(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(16.dp),
-        color = rowBg,
-        border = BorderStroke(1.dp, edgeColor.copy(alpha = 0.25f)),
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 14.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.Top,
+                .size(40.dp)
+                .background(iconBg, RoundedCornerShape(10.dp)),
+            contentAlignment = Alignment.Center,
         ) {
-            Box(
-                modifier = Modifier
-                    .padding(top = 2.dp)
-                    .size(36.dp)
-                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(10.dp)),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    sourceIcon,
-                    contentDescription = sourceName,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.size(18.dp),
-                )
-            }
+            Icon(
+                sourceIcon,
+                contentDescription = sourceName,
+                tint = riskTextColor,
+                modifier = Modifier.size(18.dp),
+            )
+        }
 
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(3.dp),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = senderTitle,
-                        style = MaterialTheme.typography.titleSmall.copy(fontSize = 14.sp),
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.weight(1f),
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text(
-                        text = timeAgo,
-                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
-                        color = SigapTheme.colors.textMuted,
-                    )
-                }
-
                 Text(
-                    text = alert.redactedSnippet,
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp, lineHeight = 18.sp),
-                    color = SigapTheme.colors.textMuted,
+                    text = senderTitle,
+                    style = MaterialTheme.typography.titleSmall.copy(fontSize = 14.sp),
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f),
                 )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = timeAgo,
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                    color = SigapTheme.colors.textMuted,
+                )
+            }
 
-                Row(
-                    modifier = Modifier.padding(top = 2.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Surface(
-                        shape = RoundedCornerShape(6.dp),
-                        color = MaterialTheme.colorScheme.surface,
-                    ) {
-                        Text(
-                            text = sourceName,
-                            style = MaterialTheme.typography.labelMedium.copy(fontSize = 13.sp),
-                            fontWeight = FontWeight.SemiBold,
-                            color = SigapTheme.colors.textMuted,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                        )
-                    }
-                    Surface(
-                        shape = RoundedCornerShape(6.dp),
-                        color = if (isDanger) SigapTheme.colors.dangerContainer else SigapTheme.colors.cautionContainer,
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        ) {
-                            Icon(
-                                if (isDanger) Lucide.CircleAlert else Lucide.TriangleAlert,
-                                contentDescription = null,
-                                tint = riskTextColor,
-                                modifier = Modifier.size(13.dp),
-                            )
-                            Text(
-                                text = riskLabel,
-                                style = MaterialTheme.typography.labelMedium.copy(fontSize = 13.sp),
-                                fontWeight = FontWeight.Bold,
-                                color = riskTextColor,
-                            )
-                        }
-                    }
-                }
+            Text(
+                text = alert.redactedSnippet,
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp, lineHeight = 18.sp),
+                color = SigapTheme.colors.textMuted,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+
+            Row(
+                modifier = Modifier.padding(top = 2.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Text(
+                    text = sourceName,
+                    style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp),
+                    fontWeight = FontWeight.Medium,
+                    color = SigapTheme.colors.textMuted,
+                )
+                Text(
+                    text = "·",
+                    style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp),
+                    color = SigapTheme.colors.textMuted,
+                )
+                Box(
+                    modifier = Modifier
+                        .size(6.dp)
+                        .background(dotColor, CircleShape),
+                )
+                Text(
+                    text = riskLabel,
+                    style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp),
+                    fontWeight = FontWeight.SemiBold,
+                    color = riskTextColor,
+                )
             }
         }
+
+        Icon(
+            Lucide.ChevronRight,
+            contentDescription = null,
+            tint = SigapTheme.colors.textMuted,
+            modifier = Modifier.size(16.dp),
+        )
     }
 }
 

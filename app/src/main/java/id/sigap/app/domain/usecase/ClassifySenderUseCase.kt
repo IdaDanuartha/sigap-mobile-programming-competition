@@ -12,7 +12,8 @@ class ClassifySenderUseCase(
     private val smsPackages: Set<String>,
 ) {
     suspend operator fun invoke(sourcePackage: String, label: String): SenderKind? {
-        if (label.isBlank() || trusted.isTrusted(SenderLabels.hash(label))) return null
+        if (label.isBlank()) return null
+        if (trusted.isTrusted(SenderLabels.hash(label)) || trusted.isTrusted(label.trim())) return null
         return if (contacts.hasPermission()) classifyWithContacts(label) else classifyWithoutContacts(sourcePackage, label)
     }
 
@@ -22,9 +23,8 @@ class ClassifySenderUseCase(
         else -> SenderKind.UNKNOWN
     }
 
-    private fun classifyWithoutContacts(sourcePackage: String, label: String): SenderKind? = when {
-        SenderLabels.looksLikePhoneNumber(label) -> SenderKind.UNKNOWN
+    private fun classifyWithoutContacts(sourcePackage: String, label: String): SenderKind = when {
         sourcePackage in smsPackages && SenderLabels.looksLikeShortCode(label) -> SenderKind.SHORTCODE
-        else -> null
+        else -> SenderKind.UNKNOWN
     }
 }

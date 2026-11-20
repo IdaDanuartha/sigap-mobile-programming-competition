@@ -16,7 +16,7 @@ class KeywordGroup(words: List<String>) {
 /** Tunable detection constants: weights, keywords, brand and domain lists. */
 object DetectionConfig {
     const val MAX_SCORE = 100
-    const val SNIPPET_MAX_CHARS = 160
+    const val SNIPPET_MAX_CHARS = 260
     const val MAX_REASONS = 5
     const val SAFE_OTP_SCORE = 5
     const val LOOKALIKE_MAX_DISTANCE = 1

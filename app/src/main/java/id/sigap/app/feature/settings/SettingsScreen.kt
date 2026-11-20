@@ -104,6 +104,7 @@ import com.composables.icons.lucide.ShieldAlert
 import com.composables.icons.lucide.ShieldCheck
 import com.composables.icons.lucide.SlidersHorizontal
 import com.composables.icons.lucide.Smartphone
+import com.composables.icons.lucide.Sparkles
 import com.composables.icons.lucide.Sun
 import com.composables.icons.lucide.Trash2
 import com.composables.icons.lucide.TriangleAlert
@@ -142,7 +143,7 @@ fun SettingsScreen(
     val container = (context.applicationContext as SigapApp).container
     val viewModel: SettingsViewModel = viewModel(
         factory = viewModelFactory {
-            initializer { SettingsViewModel(container.settings, container.trustedSenders, container::clearAllData) }
+            initializer { SettingsViewModel(container.settings, container.trustedSenders, container::clearAllData, container::setDemoMode) }
         },
     )
     val settings by viewModel.userSettings.collectAsStateWithLifecycle()
@@ -173,6 +174,7 @@ fun SettingsScreen(
                 onSetSensitivity = viewModel::setSensitivity,
                 onSetCloudConsent = viewModel::setCloudConsent,
                 onSetThemeMode = viewModel::setThemeMode,
+                onSetDemoMode = viewModel::setDemoMode,
             )
             SettingsView.MONITORED_APPS -> MonitoredAppsContent(
                 disabledPackages = settings.disabledPackages,
@@ -212,6 +214,7 @@ private fun SettingsOverviewContent(
     onSetSensitivity: (Sensitivity) -> Unit,
     onSetCloudConsent: (Boolean) -> Unit,
     onSetThemeMode: (ThemeMode) -> Unit,
+    onSetDemoMode: (Boolean) -> Unit = {},
 ) {
     val context = LocalContext.current
     val isEnglish = LocalConfiguration.current.locales[0]?.language == "en" ||
@@ -414,6 +417,17 @@ private fun SettingsOverviewContent(
                         title = t("Bahasa", "Language"),
                         value = if (isEnglish) "English" else "Bahasa Indonesia",
                         onClick = { showLanguageDialog = true },
+                    )
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
+                    SettingToggleRow(
+                        icon = Lucide.Sparkles,
+                        title = t("Mode Demo", "Demo Mode"),
+                        subtitle = t(
+                            "Isi data contoh notifikasi, keluarga, & preset cek untuk demo/video",
+                            "Populate sample alerts, family links, & quick check presets for demos",
+                        ),
+                        checked = settings.demoMode,
+                        onCheckedChange = onSetDemoMode,
                     )
                 }
             }
@@ -1530,10 +1544,10 @@ private fun PrivacyDataContent(
                     onClick = { showClearConfirm = true },
                     shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFFFECEB),
-                        contentColor = Color(0xFFBA1A1A),
+                        containerColor = SigapTheme.colors.dangerContainer,
+                        contentColor = SigapTheme.colors.danger,
                     ),
-                    border = BorderStroke(1.dp, Color(0xFFFFB4AB)),
+                    border = BorderStroke(1.dp, SigapTheme.colors.danger.copy(alpha = 0.4f)),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
@@ -2012,16 +2026,21 @@ private fun MonitoredAppToggleRow(
                         text = name,
                         style = MaterialTheme.typography.titleSmall.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false),
                     )
                     Surface(
                         shape = RoundedCornerShape(6.dp),
-                        color = if (isInstalled) Color(0xFFD5EBE2) else MaterialTheme.colorScheme.surfaceContainer,
+                        color = if (isInstalled) SigapTheme.colors.safeContainer else MaterialTheme.colorScheme.surfaceContainer,
                     ) {
                         Text(
                             text = if (isInstalled) "Terpasang" else "Tidak Terpasang",
                             style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
-                            color = if (isInstalled) Color(0xFF14594A) else SigapTheme.colors.textMuted,
+                            color = if (isInstalled) SigapTheme.colors.safe else SigapTheme.colors.textMuted,
                             fontWeight = FontWeight.SemiBold,
+                            maxLines = 1,
+                            softWrap = false,
                             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                         )
                     }

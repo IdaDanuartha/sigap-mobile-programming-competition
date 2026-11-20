@@ -32,6 +32,7 @@ class SettingsRepository(private val context: Context) {
     suspend fun setRetentionDays(value: Int) = edit { it[KEY_RETENTION] = value }
     suspend fun setThemeMode(value: ThemeMode) = edit { it[KEY_THEME] = value.name }
     suspend fun setHideDangerous(value: Boolean) = edit { it[KEY_HIDE_DANGEROUS] = value }
+    suspend fun setDemoMode(value: Boolean) = edit { it[KEY_DEMO_MODE] = value }
 
     suspend fun setPackageEnabled(packageName: String, enabled: Boolean) = edit {
         val current = it[KEY_DISABLED_PACKAGES].orEmpty()
@@ -54,6 +55,7 @@ class SettingsRepository(private val context: Context) {
         retentionDays = prefs[KEY_RETENTION] ?: UserSettings.DEFAULT_RETENTION_DAYS,
         themeMode = prefs[KEY_THEME]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.SYSTEM,
         hideDangerous = prefs[KEY_HIDE_DANGEROUS] ?: false,
+        demoMode = prefs[KEY_DEMO_MODE] ?: false,
         disabledPackages = prefs[KEY_DISABLED_PACKAGES].orEmpty(),
         confirmedChecks = prefs[KEY_CONFIRMED_CHECKS].orEmpty(),
     )
@@ -66,6 +68,7 @@ class SettingsRepository(private val context: Context) {
         val KEY_RETENTION = intPreferencesKey("retention_days")
         val KEY_THEME = stringPreferencesKey("theme_mode")
         val KEY_HIDE_DANGEROUS = booleanPreferencesKey("hide_dangerous")
+        val KEY_DEMO_MODE = booleanPreferencesKey("demo_mode")
         val KEY_DISABLED_PACKAGES = stringSetPreferencesKey("disabled_packages")
         val KEY_CONFIRMED_CHECKS = stringSetPreferencesKey("confirmed_checks")
     }

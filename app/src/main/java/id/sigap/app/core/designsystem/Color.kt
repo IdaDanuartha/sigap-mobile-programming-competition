@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 internal object SigapPalette {
     val LightBackground = Color(0xFFF5F1EA)
     val LightSurface = Color(0xFFFFFFFF)
-    val LightSurfaceContainer = Color(0xFFEAE4D9)
+    val LightSurfaceContainer = Color(0xFFF7F4EE)
     val LightOutline = Color(0xFFDDD7CC)
     val LightPrimary = Color(0xFFC85A32)
     val LightOnPrimary = Color(0xFFFFFFFF)

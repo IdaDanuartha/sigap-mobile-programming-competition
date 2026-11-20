@@ -96,9 +96,10 @@ fun EntityLookupScreen(onBack: () -> Unit) {
     val context = LocalContext.current
     val container = (context.applicationContext as SigapApp).container
     val keyboardController = LocalSoftwareKeyboardController.current
+    val isDemoMode = remember { container.settingsState.value.demoMode }
 
     var selectedType by remember { mutableStateOf(EntityType.LINK) }
-    var input by remember { mutableStateOf("https://bit.ly/paket-jnt-resi") }
+    var input by remember { mutableStateOf(if (isDemoMode) "https://bit.ly/paket-jnt-resi" else "") }
     var searchedEntity by remember { mutableStateOf<NormalizedEntity?>(null) }
     var hit by remember { mutableStateOf<CommunityHit?>(null) }
     var hasSearched by remember { mutableStateOf(false) }
@@ -106,13 +107,15 @@ fun EntityLookupScreen(onBack: () -> Unit) {
     var showReportSheet by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
-    // Run initial search for sample bit.ly link so the screen loads with the rich design directly
-    LaunchedEffect(Unit) {
-        val normalized = container.entityNormalizer.normalize(selectedType, input)
-        if (normalized != null) {
-            searchedEntity = normalized
-            hit = container.community.lookup(normalized)
-            hasSearched = true
+    // Run initial search only when Demo Mode is enabled
+    LaunchedEffect(isDemoMode) {
+        if (isDemoMode && input.isNotBlank()) {
+            val normalized = container.entityNormalizer.normalize(selectedType, input)
+            if (normalized != null) {
+                searchedEntity = normalized
+                hit = container.community.lookup(normalized)
+                hasSearched = true
+            }
         }
     }
 
@@ -164,10 +167,14 @@ fun EntityLookupScreen(onBack: () -> Unit) {
                     selectedType = it
                     hasSearched = false
                     invalid = false
-                    input = when (it) {
-                        EntityType.LINK -> "https://bit.ly/paket-jnt-resi"
-                        EntityType.PHONE -> "+62 821-4820-9921"
-                        EntityType.BANK_ACCOUNT -> "1234567890"
+                    input = if (isDemoMode) {
+                        when (it) {
+                            EntityType.LINK -> "https://bit.ly/paket-jnt-resi"
+                            EntityType.PHONE -> "+62 821-4820-9921"
+                            EntityType.BANK_ACCOUNT -> "1234567890"
+                        }
+                    } else {
+                        ""
                     }
                 },
             )

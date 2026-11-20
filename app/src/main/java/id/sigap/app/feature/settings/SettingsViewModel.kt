@@ -17,6 +17,7 @@ class SettingsViewModel(
     private val settings: SettingsRepository,
     private val trusted: TrustedSenderRepository,
     private val clearAll: () -> Unit,
+    private val onToggleDemoMode: (Boolean) -> Unit = {},
 ) : ViewModel() {
 
     val userSettings: StateFlow<UserSettings> =
@@ -47,6 +48,10 @@ class SettingsViewModel(
 
     fun setHideDangerous(value: Boolean) {
         viewModelScope.launch { settings.setHideDangerous(value) }
+    }
+
+    fun setDemoMode(value: Boolean) {
+        onToggleDemoMode(value)
     }
 
     fun setPackageEnabled(packageName: String, enabled: Boolean) {

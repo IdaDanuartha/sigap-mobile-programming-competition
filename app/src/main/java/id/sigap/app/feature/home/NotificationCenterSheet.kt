@@ -59,8 +59,10 @@ import com.composables.icons.lucide.TriangleAlert
 import com.composables.icons.lucide.X
 import id.sigap.app.SigapApp
 import id.sigap.app.core.designsystem.SigapTheme
+import id.sigap.app.core.util.PermissionChecks
 import id.sigap.app.domain.family.FamilyRole
 import id.sigap.app.domain.model.RiskLevel
+import id.sigap.app.domain.model.ScamCategory
 
 data class NotificationItem(
     val id: String,
@@ -76,6 +78,7 @@ data class NotificationItem(
     val isUnread: Boolean = true,
     val actionLabel: String? = null,
     val actionType: NotificationActionType? = null,
+    val scanId: Long? = null,
 )
 
 enum class NotificationActionType {
@@ -88,7 +91,7 @@ enum class NotificationActionType {
 @Composable
 fun NotificationCenterSheet(
     onDismiss: () -> Unit,
-    onOpenAlertDetail: () -> Unit,
+    onOpenAlertDetail: (Long) -> Unit,
     onOpenQuiz: () -> Unit,
     onOpenSimulation: () -> Unit,
 ) {
@@ -129,10 +132,25 @@ fun NotificationCenterSheet(
 
         recentScans.filter { it.level != RiskLevel.SAFE }.forEach { scan ->
             val isDanger = scan.level == RiskLevel.DANGER
+            val categoryTitle = when (scan.category) {
+                ScamCategory.APK_MALWARE -> "File APK Berbahaya"
+                ScamCategory.FAKE_COURIER -> "Kurir Paket Palsu"
+                ScamCategory.FAKE_INVITATION -> "Undangan APK Palsu"
+                ScamCategory.AUTHORITY_IMPERSONATION -> "Penipuan Mengatasnamakan Instansi"
+                ScamCategory.BANK_PHISHING -> "Phishing Perbankan"
+                ScamCategory.FAKE_PRIZE -> "Hadiah / Undian Palsu"
+                ScamCategory.INVESTMENT -> "Investasi Bodong"
+                ScamCategory.ONLINE_LOAN -> "Pinjaman Online Ilegal"
+                ScamCategory.ROMANCE -> "Penipuan Asmara"
+                ScamCategory.JOB_SCAM -> "Lowongan Kerja Palsu"
+                ScamCategory.MARKETPLACE_FRAUD -> "Penipuan Marketplace"
+                ScamCategory.OTP_THEFT -> "Pencurian Kode OTP"
+                ScamCategory.OTHER -> "Pesan Mencurigakan"
+            }
             list.add(
                 NotificationItem(
                     id = "scan_${scan.id}",
-                    title = "Peringatan: ${scan.category.name.replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }}",
+                    title = "Peringatan: $categoryTitle",
                     message = scan.redactedSnippet,
                     timeAgo = DateUtils.getRelativeTimeSpanString(scan.timestamp).toString(),
                     icon = if (isDanger) Lucide.ShieldAlert else Lucide.TriangleAlert,
@@ -144,22 +162,28 @@ fun NotificationCenterSheet(
                     isUnread = true,
                     actionLabel = "Lihat Detail Peringatan",
                     actionType = NotificationActionType.ALERT_DETAIL,
+                    scanId = scan.id,
                 )
             )
         }
 
+        val listenerActive = PermissionChecks.isNotificationListenerEnabled(context)
         list.add(
             NotificationItem(
                 id = "sys_protect",
-                title = "Proteksi Real-time Aktif",
-                message = "Pemindaian notifikasi WhatsApp, Telegram, dan SMS berjalan normal tanpa gangguan.",
-                timeAgo = "Aktif",
-                icon = Lucide.ShieldCheck,
-                iconTint = sigapColors.safe,
-                iconBg = sigapColors.safeContainer,
-                badge = "Aktif",
-                badgeColor = sigapColors.safe,
-                badgeBg = sigapColors.safeContainer,
+                title = if (listenerActive) "Proteksi Real-time Aktif" else "Proteksi Belum Aktif",
+                message = if (listenerActive) {
+                    "Pemindaian notifikasi WhatsApp, Telegram, dan SMS berjalan normal."
+                } else {
+                    "Aktifkan akses notifikasi agar Sigap dapat memindai pesan masuk secara otomatis."
+                },
+                timeAgo = if (listenerActive) "Aktif" else "Nonaktif",
+                icon = if (listenerActive) Lucide.ShieldCheck else Lucide.TriangleAlert,
+                iconTint = if (listenerActive) sigapColors.safe else sigapColors.onCaution,
+                iconBg = if (listenerActive) sigapColors.safeContainer else sigapColors.cautionContainer,
+                badge = if (listenerActive) "Aktif" else "Perlu Izin",
+                badgeColor = if (listenerActive) sigapColors.safe else sigapColors.onCaution,
+                badgeBg = if (listenerActive) sigapColors.safeContainer else sigapColors.cautionContainer,
                 isUnread = false,
             )
         )
@@ -285,7 +309,7 @@ fun NotificationCenterSheet(
                         onClickAction = {
                             onDismiss()
                             when (item.actionType) {
-                                NotificationActionType.ALERT_DETAIL -> onOpenAlertDetail()
+                                NotificationActionType.ALERT_DETAIL -> item.scanId?.let(onOpenAlertDetail)
                                 NotificationActionType.QUIZ -> onOpenQuiz()
                                 NotificationActionType.SIMULATION -> onOpenSimulation()
                                 null -> Unit

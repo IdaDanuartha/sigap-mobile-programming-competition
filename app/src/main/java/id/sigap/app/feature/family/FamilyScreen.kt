@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
@@ -428,16 +429,17 @@ private fun FamilyOverviewContent(
                 if (guardians.isEmpty()) {
                     Surface(
                         shape = RoundedCornerShape(16.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainer,
+                        color = MaterialTheme.colorScheme.surface,
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         Column(
-                            Modifier.padding(16.dp),
+                            Modifier.padding(18.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             Box(
-                                Modifier.size(40.dp).background(MaterialTheme.colorScheme.surface, CircleShape),
+                                Modifier.size(44.dp).background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 Icon(Lucide.UserPlus, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
@@ -445,7 +447,7 @@ private fun FamilyOverviewContent(
                             Text("Belum Ada Penjaga Terhubung", style = MaterialTheme.typography.titleSmall.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold))
                             Text(
                                 "Tambahkan wali keluarga terpercaya yang akan menerima peringatan otomatis bila ponsel Anda mendeteksi ancaman berbahaya.",
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, lineHeight = 17.sp),
                                 color = SigapTheme.colors.textMuted,
                                 textAlign = TextAlign.Center,
                             )
@@ -484,16 +486,17 @@ private fun FamilyOverviewContent(
                 if (protectedList.isEmpty()) {
                     Surface(
                         shape = RoundedCornerShape(16.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainer,
+                        color = MaterialTheme.colorScheme.surface,
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         Column(
-                            Modifier.padding(16.dp),
+                            Modifier.padding(18.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             Box(
-                                Modifier.size(40.dp).background(MaterialTheme.colorScheme.surface, CircleShape),
+                                Modifier.size(44.dp).background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 Icon(Lucide.HandHeart, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
@@ -501,7 +504,7 @@ private fun FamilyOverviewContent(
                             Text("Belum Ada Anggota yang Dijaga", style = MaterialTheme.typography.titleSmall.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold))
                             Text(
                                 "Gunakan fitur Wali Amanat untuk melindungi orang tua atau kerabat dari modus penipuan berformat APK.",
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, lineHeight = 17.sp),
                                 color = SigapTheme.colors.textMuted,
                                 textAlign = TextAlign.Center,
                             )
@@ -1378,20 +1381,46 @@ private fun BecomeGuardianContent(
                         }
                     }
 
-                    // 6 Pin boxes
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        pinDigits.forEachIndexed { idx, digit ->
-                            Box(
-                                Modifier
-                                    .size(44.dp)
-                                    .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(12.dp))
-                                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(12.dp)),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                Text(digit, style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold))
+                    // 6 Pin boxes (editable via BasicTextField)
+                    val pinCode = pinDigits.joinToString("")
+                    BasicTextField(
+                        value = pinCode,
+                        onValueChange = { raw ->
+                            val clean = raw.filter { it.isDigit() }.take(6)
+                            pinDigits = List(6) { idx -> clean.getOrNull(idx)?.toString().orEmpty() }
+                        },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.fillMaxWidth(),
+                        decorationBox = {
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                                pinDigits.forEachIndexed { idx, digit ->
+                                    val isFocusedSlot = idx == pinCode.length && pinCode.length < 6
+                                    Box(
+                                        Modifier
+                                            .size(44.dp)
+                                            .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(12.dp))
+                                            .border(
+                                                width = if (isFocusedSlot || digit.isNotEmpty()) 1.5.dp else 1.dp,
+                                                color = if (isFocusedSlot || digit.isNotEmpty()) {
+                                                    MaterialTheme.colorScheme.primary
+                                                } else {
+                                                    MaterialTheme.colorScheme.outline
+                                                },
+                                                shape = RoundedCornerShape(12.dp),
+                                            ),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Text(
+                                            text = digit,
+                                            style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+                                            color = MaterialTheme.colorScheme.onSurface,
+                                        )
+                                    }
+                                }
                             }
-                        }
-                    }
+                        },
+                    )
 
                     // ATAU divider
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {

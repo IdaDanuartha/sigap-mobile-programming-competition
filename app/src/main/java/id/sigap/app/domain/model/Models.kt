@@ -78,6 +78,7 @@ data class UserSettings(
     val retentionDays: Int = DEFAULT_RETENTION_DAYS,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val hideDangerous: Boolean = false,
+    val demoMode: Boolean = false,
     val disabledPackages: Set<String> = emptySet(),
     val confirmedChecks: Set<String> = emptySet(),
 ) {

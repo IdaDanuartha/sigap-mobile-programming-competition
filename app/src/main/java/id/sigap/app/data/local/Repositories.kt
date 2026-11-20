@@ -23,15 +23,32 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-class RoomScanHistoryRepository(private val dao: ScanResultDao) : ScanHistoryRepository {
+class RoomScanHistoryRepository(
+    private val dao: ScanResultDao,
+    private val demoModeProvider: () -> Boolean = { false },
+) : ScanHistoryRepository {
+
+    private var cleanedDummy = false
+
+    private suspend fun ensureRealDataOnly() {
+        if (cleanedDummy) return
+        cleanedDummy = true
+        if (!demoModeProvider()) {
+            dao.deleteSeededDummyScans()
+        }
+    }
 
     override suspend fun save(result: ScanResult): Long = dao.insert(result.toEntity())
 
-    override fun observeLatestAlerts(limit: Int): Flow<List<ScanResult>> =
-        dao.observeLatestAlerts(limit).map { rows -> rows.map { it.toDomain() } }
+    override fun observeLatestAlerts(limit: Int): Flow<List<ScanResult>> = flow {
+        ensureRealDataOnly()
+        emitAll(dao.observeLatestAlerts(limit).map { rows -> rows.map { it.toDomain() } })
+    }
 
-    override fun observeAll(): Flow<List<ScanResult>> =
-        dao.observeAll().map { rows -> rows.map { it.toDomain() } }
+    override fun observeAll(): Flow<List<ScanResult>> = flow {
+        ensureRealDataOnly()
+        emitAll(dao.observeAll().map { rows -> rows.map { it.toDomain() } })
+    }
 
     override fun observe(id: Long): Flow<ScanResult?> =
         dao.observeById(id).map { it?.toDomain() }
@@ -42,8 +59,10 @@ class RoomScanHistoryRepository(private val dao: ScanResultDao) : ScanHistoryRep
 
     override suspend fun deleteOlderThan(cutoff: Long): Int = dao.deleteOlderThan(cutoff)
 
-    override fun observeTodayStats(): Flow<TodayStats> =
-        dao.observeCountsSince(startOfToday()).map(::toStats)
+    override fun observeTodayStats(): Flow<TodayStats> = flow {
+        ensureRealDataOnly()
+        emitAll(dao.observeCountsSince(startOfToday()).map(::toStats))
+    }
 
     private fun toStats(rows: List<LevelCount>): TodayStats {
         fun count(level: RiskLevel) = rows.firstOrNull { it.riskLevel == level.name }?.total ?: 0
@@ -91,7 +110,10 @@ private fun ScanResultEntity.toDomain() = ScanResult(
     senderKey = senderKey,
 )
 
-class RoomTrustedSenderRepository(private val dao: TrustedSenderDao) : TrustedSenderRepository {
+class RoomTrustedSenderRepository(
+    private val dao: TrustedSenderDao,
+    private val demoModeProvider: () -> Boolean = { false },
+) : TrustedSenderRepository {
     override suspend fun isTrusted(senderKey: String): Boolean = dao.isTrusted(senderKey)
 
     override suspend fun trust(senderKey: String) =
@@ -107,8 +129,10 @@ class RoomTrustedSenderRepository(private val dao: TrustedSenderDao) : TrustedSe
     override suspend fun ensureSeeded() {
         if (cleanedDummy) return
         cleanedDummy = true
-        dao.delete("BANKMANDIRI")
-        dao.delete("+62 812-9844-8812")
+        if (!demoModeProvider()) {
+            dao.delete("BANKMANDIRI")
+            dao.delete("+62 812-9844-8812")
+        }
     }
 }
 

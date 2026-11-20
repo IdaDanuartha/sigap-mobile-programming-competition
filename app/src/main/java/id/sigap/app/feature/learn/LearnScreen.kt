@@ -750,7 +750,8 @@ private fun PopularArticleCard(
 private fun AgilityQuizBanner(onPlay: () -> Unit) {
     Surface(
         shape = RoundedCornerShape(20.dp),
-        color = SigapTheme.colors.dominantSurface,
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp))
@@ -785,7 +786,7 @@ private fun AgilityQuizBanner(onPlay: () -> Unit) {
                 Text(
                     text = "2 menit • Simulasi nyata",
                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
-                    color = SigapTheme.colors.onDominantMuted,
+                    color = SigapTheme.colors.textMuted,
                 )
             }
 
@@ -797,12 +798,12 @@ private fun AgilityQuizBanner(onPlay: () -> Unit) {
                         fontWeight = FontWeight.ExtraBold,
                         lineHeight = 22.sp,
                     ),
-                    color = SigapTheme.colors.onDominant,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
                 Text(
                     text = "Latihan interaktif mengenali pesan jebakan sebelum terjadi.",
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp, lineHeight = 18.sp),
-                    color = SigapTheme.colors.onDominantMuted,
+                    color = SigapTheme.colors.textMuted,
                 )
             }
 

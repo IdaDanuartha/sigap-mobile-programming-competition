@@ -470,7 +470,7 @@ private fun QuizScenarioCard(question: QuizQuestion) {
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = Color(0xFFFBE8E8),
+                    color = SigapTheme.colors.dangerContainer,
                 ) {
                     Text(
                         text = question.categoryBadge,
@@ -478,7 +478,7 @@ private fun QuizScenarioCard(question: QuizQuestion) {
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                         ),
-                        color = Color(0xFFB3261E),
+                        color = SigapTheme.colors.danger,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                     )
                 }
@@ -515,7 +515,7 @@ private fun QuizScenarioCard(question: QuizQuestion) {
                         Surface(
                             shape = RoundedCornerShape(10.dp),
                             color = MaterialTheme.colorScheme.surface,
-                            border = BorderStroke(1.dp, Color(0xFFE0C2BF)),
+                            border = BorderStroke(1.dp, SigapTheme.colors.danger.copy(alpha = 0.35f)),
                         ) {
                             Row(
                                 Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
@@ -525,7 +525,7 @@ private fun QuizScenarioCard(question: QuizQuestion) {
                                 Icon(
                                     Lucide.FileWarning,
                                     contentDescription = null,
-                                    tint = Color(0xFFB3261E),
+                                    tint = SigapTheme.colors.danger,
                                     modifier = Modifier.size(20.dp),
                                 )
                                 Column {
@@ -535,7 +535,7 @@ private fun QuizScenarioCard(question: QuizQuestion) {
                                             fontWeight = FontWeight.Bold,
                                             fontSize = 12.sp,
                                         ),
-                                        color = Color(0xFFB3261E),
+                                        color = SigapTheme.colors.danger,
                                     )
                                     Text(
                                         text = "Berkas Aplikasi Android (Pencuri SMS/OTP)",
@@ -562,8 +562,8 @@ private fun QuizOptionItem(
     val borderColor by animateColorAsState(
         targetValue = when {
             !isAnswered && isSelected -> MaterialTheme.colorScheme.primary
-            isAnswered && option.isCorrect -> Color(0xFF14594A)
-            isAnswered && isSelected && !option.isCorrect -> Color(0xFFB3261E)
+            isAnswered && option.isCorrect -> SigapTheme.colors.safe
+            isAnswered && isSelected && !option.isCorrect -> SigapTheme.colors.danger
             else -> MaterialTheme.colorScheme.outline
         },
         label = "borderColor",
@@ -571,9 +571,9 @@ private fun QuizOptionItem(
 
     val containerColor by animateColorAsState(
         targetValue = when {
-            !isAnswered && isSelected -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-            isAnswered && option.isCorrect -> Color(0xFFD5EBE2)
-            isAnswered && isSelected && !option.isCorrect -> Color(0xFFFBE8E8)
+            !isAnswered && isSelected -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
+            isAnswered && option.isCorrect -> SigapTheme.colors.safeContainer
+            isAnswered && isSelected && !option.isCorrect -> SigapTheme.colors.dangerContainer
             else -> MaterialTheme.colorScheme.surface
         },
         label = "containerColor",
@@ -599,8 +599,8 @@ private fun QuizOptionItem(
                     .border(
                         1.5.dp,
                         when {
-                            isAnswered && option.isCorrect -> Color(0xFF14594A)
-                            isAnswered && isSelected && !option.isCorrect -> Color(0xFFB3261E)
+                            isAnswered && option.isCorrect -> SigapTheme.colors.safe
+                            isAnswered && isSelected && !option.isCorrect -> SigapTheme.colors.danger
                             isSelected -> MaterialTheme.colorScheme.primary
                             else -> MaterialTheme.colorScheme.outline
                         },
@@ -608,8 +608,8 @@ private fun QuizOptionItem(
                     )
                     .background(
                         when {
-                            isAnswered && option.isCorrect -> Color(0xFF14594A)
-                            isAnswered && isSelected && !option.isCorrect -> Color(0xFFB3261E)
+                            isAnswered && option.isCorrect -> SigapTheme.colors.safe
+                            isAnswered && isSelected && !option.isCorrect -> SigapTheme.colors.danger
                             isSelected -> MaterialTheme.colorScheme.primary
                             else -> Color.Transparent
                         },
@@ -648,8 +648,11 @@ private fun QuizExplanationCard(
 ) {
     Surface(
         shape = RoundedCornerShape(14.dp),
-        color = if (isCorrect) Color(0xFFEBF6F1) else Color(0xFFFFF3EE),
-        border = BorderStroke(1.dp, if (isCorrect) Color(0xFFB8DFD1) else Color(0xFFF7D1BA)),
+        color = if (isCorrect) SigapTheme.colors.safeContainer else SigapTheme.colors.attentionCardBg,
+        border = BorderStroke(
+            1.dp,
+            if (isCorrect) SigapTheme.colors.safe.copy(alpha = 0.35f) else SigapTheme.colors.caution.copy(alpha = 0.4f),
+        ),
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(
@@ -663,7 +666,7 @@ private fun QuizExplanationCard(
                 Icon(
                     imageVector = if (isCorrect) Lucide.ShieldCheck else Lucide.TriangleAlert,
                     contentDescription = null,
-                    tint = if (isCorrect) Color(0xFF14594A) else Color(0xFFBC5800),
+                    tint = if (isCorrect) SigapTheme.colors.safe else SigapTheme.colors.onCaution,
                     modifier = Modifier.size(20.dp),
                 )
                 Text(
@@ -672,7 +675,7 @@ private fun QuizExplanationCard(
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,
                     ),
-                    color = if (isCorrect) Color(0xFF14594A) else Color(0xFFBC5800),
+                    color = if (isCorrect) SigapTheme.colors.safe else SigapTheme.colors.onCaution,
                 )
             }
 

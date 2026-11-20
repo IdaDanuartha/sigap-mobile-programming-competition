@@ -593,8 +593,7 @@ private fun SettingsOverviewContent(
 
     // Language Dialog (Premium Select Dialog)
     if (showLanguageDialog) {
-        val currentTag = AppCompatDelegate.getApplicationLocales().toLanguageTags().ifBlank { "id" }
-        val currentLang = if (currentTag.startsWith("en")) "en" else "id"
+        val currentLang = if (isEnglish) "en" else "id"
         SigapOptionSelectDialog(
             title = t("Pilih Bahasa Aplikasi", "Choose App Language"),
             subtitle = t(

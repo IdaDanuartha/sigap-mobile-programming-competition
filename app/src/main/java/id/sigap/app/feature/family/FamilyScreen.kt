@@ -1178,11 +1178,11 @@ private fun InviteGuardianContent(onBack: () -> Unit) {
                     Text("Penjaga hanya menerima indikator keamanan sistem tanpa mengekspos obrolan pribadi Anda.", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = SigapTheme.colors.textMuted)
 
                     // Dibagikan Box
-                    Surface(shape = RoundedCornerShape(12.dp), color = Color(0xFFF1F8F5), modifier = Modifier.fillMaxWidth()) {
+                    Surface(shape = RoundedCornerShape(12.dp), color = SigapTheme.colors.safeContainer, modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Icon(Lucide.Check, contentDescription = null, tint = Color(0xFF14594A), modifier = Modifier.size(16.dp))
-                                Text("Dibagikan", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = Color(0xFF14594A))
+                                Icon(Lucide.Check, contentDescription = null, tint = SigapTheme.colors.safe, modifier = Modifier.size(16.dp))
+                                Text("Dibagikan", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = SigapTheme.colors.safe)
                             }
                             PrivacyItem(isPositive = true, text = "Tingkat risiko (Aman, Waspada, Berbahaya)")
                             PrivacyItem(isPositive = true, text = "Kategori ancaman (misal: APK, Kurir Palsu)")
@@ -1193,11 +1193,11 @@ private fun InviteGuardianContent(onBack: () -> Unit) {
                     }
 
                     // Tidak Dibagikan Box
-                    Surface(shape = RoundedCornerShape(12.dp), color = Color(0xFFFDF3F2), modifier = Modifier.fillMaxWidth()) {
+                    Surface(shape = RoundedCornerShape(12.dp), color = SigapTheme.colors.dangerContainer, modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Icon(Lucide.Ban, contentDescription = null, tint = Color(0xFFBA1A1A), modifier = Modifier.size(16.dp))
-                                Text("Tidak Dibagikan", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = Color(0xFFBA1A1A))
+                                Icon(Lucide.Ban, contentDescription = null, tint = SigapTheme.colors.danger, modifier = Modifier.size(16.dp))
+                                Text("Tidak Dibagikan", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = SigapTheme.colors.danger)
                             }
                             PrivacyItem(isPositive = false, text = "Isi pesan percakapan utuh & histori chat")
                             PrivacyItem(isPositive = false, text = "Nama kontak & nomor telepon pengirim")
@@ -1249,14 +1249,42 @@ private fun InviteGuardianContent(onBack: () -> Unit) {
                         )
                     }
 
-                    Surface(shape = RoundedCornerShape(8.dp), color = Color(0xFFFFF3D6)) {
+                    var remainingSeconds by remember(inviteCode) { mutableStateOf(10 * 60) }
+                    LaunchedEffect(inviteCode) {
+                        while (remainingSeconds > 0) {
+                            kotlinx.coroutines.delay(1_000L)
+                            remainingSeconds--
+                        }
+                    }
+                    val mins = remainingSeconds / 60
+                    val secs = remainingSeconds % 60
+                    val timerText = if (remainingSeconds > 0) {
+                        String.format(java.util.Locale.US, "Berlaku %02d:%02d menit", mins, secs)
+                    } else {
+                        "Kode kedaluwarsa"
+                    }
+
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = if (remainingSeconds > 0) SigapTheme.colors.cautionContainer else SigapTheme.colors.dangerContainer,
+                    ) {
                         Row(Modifier.padding(horizontal = 10.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Icon(Lucide.Clock, contentDescription = null, tint = Color(0xFF996500), modifier = Modifier.size(12.dp))
-                            Text("Berlaku 09:41 menit", style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp), color = Color(0xFF996500), fontWeight = FontWeight.Bold)
+                            Icon(
+                                Lucide.Clock,
+                                contentDescription = null,
+                                tint = if (remainingSeconds > 0) SigapTheme.colors.onCaution else SigapTheme.colors.danger,
+                                modifier = Modifier.size(12.dp),
+                            )
+                            Text(
+                                text = timerText,
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
+                                color = if (remainingSeconds > 0) SigapTheme.colors.onCaution else SigapTheme.colors.danger,
+                                fontWeight = FontWeight.Bold,
+                            )
                         }
                     }
 
-                    // QR Code Graphic
+                    // QR Code Graphic (always dark ink on white background for crisp contrast)
                     Box(
                         Modifier
                             .size(140.dp)
@@ -1264,7 +1292,7 @@ private fun InviteGuardianContent(onBack: () -> Unit) {
                             .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(12.dp)),
                         contentAlignment = Alignment.Center,
                     ) {
-                        Icon(Lucide.QrCode, contentDescription = null, tint = Color(0xFF14594A), modifier = Modifier.size(110.dp))
+                        Icon(Lucide.QrCode, contentDescription = null, tint = Color(0xFF14181F), modifier = Modifier.size(110.dp))
                     }
 
                     Text(
@@ -1619,10 +1647,10 @@ private fun GuardianMonitoringContent(
             // Header: Badges & Title
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Surface(shape = RoundedCornerShape(8.dp), color = Color(0xFFD5EBE2)) {
+                    Surface(shape = RoundedCornerShape(8.dp), color = SigapTheme.colors.safeContainer) {
                         Row(modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Box(Modifier.size(5.dp).background(Color(0xFF14594A), CircleShape))
-                            Text("Sistem Penjaga Aktif", style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp), color = Color(0xFF14594A), fontWeight = FontWeight.Bold)
+                            Box(Modifier.size(5.dp).background(SigapTheme.colors.safe, CircleShape))
+                            Text("Sistem Penjaga Aktif", style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp), color = SigapTheme.colors.safe, fontWeight = FontWeight.Bold)
                         }
                     }
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -1638,34 +1666,34 @@ private fun GuardianMonitoringContent(
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Surface(
                     shape = RoundedCornerShape(16.dp),
-                    color = Color(0xFFFFE8E7),
-                    border = BorderStroke(1.dp, Color(0xFFFFCDD2)),
+                    color = SigapTheme.colors.dangerContainer,
+                    border = BorderStroke(1.dp, SigapTheme.colors.danger.copy(alpha = 0.35f)),
                     modifier = Modifier.weight(1f),
                 ) {
                     Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Box(Modifier.size(36.dp).background(Color(0xFFFFCDD2), RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
-                            Icon(Lucide.ShieldAlert, contentDescription = null, tint = Color(0xFFBA1A1A), modifier = Modifier.size(18.dp))
+                        Box(Modifier.size(36.dp).background(SigapTheme.colors.danger.copy(alpha = 0.18f), RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
+                            Icon(Lucide.ShieldAlert, contentDescription = null, tint = SigapTheme.colors.danger, modifier = Modifier.size(18.dp))
                         }
                         Column {
-                            Text(criticalCount.toString(), style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold), color = Color(0xFFBA1A1A))
-                            Text("Ancaman Kritis", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = Color(0xFFBA1A1A))
+                            Text(criticalCount.toString(), style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold), color = SigapTheme.colors.danger)
+                            Text("Ancaman Kritis", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = SigapTheme.colors.danger)
                         }
                     }
                 }
 
                 Surface(
                     shape = RoundedCornerShape(16.dp),
-                    color = Color(0xFFE8F5E9),
-                    border = BorderStroke(1.dp, Color(0xFFC8E6C9)),
+                    color = SigapTheme.colors.safeContainer,
+                    border = BorderStroke(1.dp, SigapTheme.colors.safe.copy(alpha = 0.35f)),
                     modifier = Modifier.weight(1f),
                 ) {
                     Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Box(Modifier.size(36.dp).background(Color(0xFFC8E6C9), RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
-                            Icon(Lucide.ShieldCheck, contentDescription = null, tint = Color(0xFF2E7D32), modifier = Modifier.size(18.dp))
+                        Box(Modifier.size(36.dp).background(SigapTheme.colors.safe.copy(alpha = 0.18f), RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
+                            Icon(Lucide.ShieldCheck, contentDescription = null, tint = SigapTheme.colors.safe, modifier = Modifier.size(18.dp))
                         }
                         Column {
-                            Text(safeCount.toString(), style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold), color = Color(0xFF2E7D32))
-                            Text("Kondisi Aman", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = Color(0xFF2E7D32))
+                            Text(safeCount.toString(), style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold), color = SigapTheme.colors.safe)
+                            Text("Kondisi Aman", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = SigapTheme.colors.safe)
                         }
                     }
                 }
@@ -1677,7 +1705,7 @@ private fun GuardianMonitoringContent(
                     Surface(
                         shape = RoundedCornerShape(18.dp),
                         color = MaterialTheme.colorScheme.surface,
-                        border = BorderStroke(1.dp, Color(0xFFFFCDD2)),
+                        border = BorderStroke(1.dp, SigapTheme.colors.danger.copy(alpha = 0.35f)),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         Column {
@@ -1736,16 +1764,16 @@ private fun GuardianMonitoringContent(
                                             }
                                         }
                                     }
-                                    Surface(shape = RoundedCornerShape(8.dp), color = Color(0xFFFFECC8)) {
-                                        Text("Belum ditangani", style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp), color = Color(0xFF945200), fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp))
+                                    Surface(shape = RoundedCornerShape(8.dp), color = SigapTheme.colors.cautionContainer) {
+                                        Text("Belum ditangani", style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp), color = SigapTheme.colors.onCaution, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp))
                                     }
                                 }
 
-                                Surface(shape = RoundedCornerShape(12.dp), color = Color(0xFFFDF3F2), modifier = Modifier.fillMaxWidth()) {
+                                Surface(shape = RoundedCornerShape(12.dp), color = SigapTheme.colors.dangerContainer, modifier = Modifier.fillMaxWidth()) {
                                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                            Icon(Lucide.TriangleAlert, contentDescription = null, tint = Color(0xFFBA1A1A), modifier = Modifier.size(16.dp))
-                                            Text("Aktivitas Berisiko Tinggi Terdeteksi", style = MaterialTheme.typography.titleSmall.copy(fontSize = 12.sp, fontWeight = FontWeight.Bold), color = Color(0xFFBA1A1A))
+                                            Icon(Lucide.TriangleAlert, contentDescription = null, tint = SigapTheme.colors.danger, modifier = Modifier.size(16.dp))
+                                            Text("Aktivitas Berisiko Tinggi Terdeteksi", style = MaterialTheme.typography.titleSmall.copy(fontSize = 12.sp, fontWeight = FontWeight.Bold), color = SigapTheme.colors.danger)
                                         }
                                         Text(alert.maskedSnippet ?: "Pesan berbahaya dari ${alert.sourcePackage} terdeteksi.", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, lineHeight = 17.sp), color = MaterialTheme.colorScheme.onSurface)
                                     }
@@ -1825,10 +1853,10 @@ private fun GuardianMonitoringContent(
                 ) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                            Surface(shape = RoundedCornerShape(6.dp), color = Color(0xFFD5EBE2)) {
+                            Surface(shape = RoundedCornerShape(6.dp), color = SigapTheme.colors.safeContainer) {
                                 Row(modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    Icon(Lucide.Check, contentDescription = null, tint = Color(0xFF14594A), modifier = Modifier.size(12.dp))
-                                    Text("Aman", style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp), color = Color(0xFF14594A), fontWeight = FontWeight.Bold)
+                                    Icon(Lucide.Check, contentDescription = null, tint = SigapTheme.colors.safe, modifier = Modifier.size(12.dp))
+                                    Text("Aman", style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp), color = SigapTheme.colors.safe, fontWeight = FontWeight.Bold)
                                 }
                             }
                             Text("Diperbarui baru saja", style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp), color = SigapTheme.colors.textMuted)
@@ -1836,8 +1864,8 @@ private fun GuardianMonitoringContent(
 
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                Box(Modifier.size(40.dp).background(Color(0xFFD5EBE2), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
-                                    Text(initials, fontWeight = FontWeight.Bold, color = Color(0xFF14594A), fontSize = 14.sp)
+                                Box(Modifier.size(40.dp).background(SigapTheme.colors.safeContainer, RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+                                    Text(initials, fontWeight = FontWeight.Bold, color = SigapTheme.colors.safe, fontSize = 14.sp)
                                 }
                                 Column {
                                     Text(targetName, style = MaterialTheme.typography.titleMedium.copy(fontSize = 15.sp, fontWeight = FontWeight.Bold))
@@ -2065,8 +2093,8 @@ private fun GuardianAlertDetailContent(
                             Text("Pratinjau Pesan yang Diterima", style = MaterialTheme.typography.titleMedium.copy(fontSize = 15.sp, fontWeight = FontWeight.Bold))
                         }
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Box(Modifier.size(6.dp).background(Color(0xFFBA1A1A), CircleShape))
-                            Text("Terdeteksi", style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp), color = Color(0xFFBA1A1A), fontWeight = FontWeight.Bold)
+                            Box(Modifier.size(6.dp).background(SigapTheme.colors.danger, CircleShape))
+                            Text("Terdeteksi", style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp), color = SigapTheme.colors.danger, fontWeight = FontWeight.Bold)
                         }
                     }
 
@@ -2086,18 +2114,18 @@ private fun GuardianAlertDetailContent(
                             )
 
                             // Attachment Box
-                            Surface(shape = RoundedCornerShape(10.dp), color = Color(0xFFFFE8E7), modifier = Modifier.fillMaxWidth()) {
+                            Surface(shape = RoundedCornerShape(10.dp), color = SigapTheme.colors.dangerContainer, modifier = Modifier.fillMaxWidth()) {
                                 Row(Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
                                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                        Box(Modifier.size(32.dp).background(Color(0xFFBA1A1A), RoundedCornerShape(8.dp)), contentAlignment = Alignment.Center) {
+                                        Box(Modifier.size(32.dp).background(SigapTheme.colors.danger, RoundedCornerShape(8.dp)), contentAlignment = Alignment.Center) {
                                             Icon(Lucide.FileText, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
                                         }
                                         Column {
-                                            Text("File_Mencurigakan.apk", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, fontWeight = FontWeight.Bold))
+                                            Text("File_Mencurigakan.apk", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.onSurface)
                                             Text("Paket Aplikasi Android • Risiko Tinggi", style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp), color = SigapTheme.colors.textMuted)
                                         }
                                     }
-                                    Surface(shape = RoundedCornerShape(6.dp), color = Color(0xFFBA1A1A)) {
+                                    Surface(shape = RoundedCornerShape(6.dp), color = SigapTheme.colors.danger) {
                                         Text("BAHAYA", style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp), color = Color.White, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                                     }
                                 }
